@@ -1,0 +1,1532 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>都市計画 復習資料</title>
+<style>
+:root{
+  --paper:#f7f4ec;
+  --paper2:#fffdf8;
+  --ink:#23262b;
+  --ink2:#4d545e;
+  --ink3:#7b838f;
+  --line:#ddd6c6;
+  --accent:#1f4e79;
+  --accent2:#b23a2e;
+  --accent3:#2c6e49;
+  --gold:#a9862f;
+  --shadow:0 1px 2px rgba(35,38,43,.06),0 8px 24px rgba(35,38,43,.06);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;background:var(--paper);color:var(--ink);
+  font-family:"Hiragino Kaku Gothic ProN","Yu Gothic","YuGothic","Noto Sans JP",Meiryo,sans-serif;
+  font-size:15px;line-height:1.85;letter-spacing:.02em;
+  -webkit-font-smoothing:antialiased;
+}
+.wrap{max-width:1080px;margin:0 auto;padding:0 28px}
+/* ---------- header ---------- */
+header.hero{
+  background:linear-gradient(160deg,#1b2a3a 0%,#1f4e79 60%,#2d6a8f 100%);
+  color:#f4efe3;padding:64px 0 54px;position:relative;overflow:hidden;
+}
+header.hero::after{
+  content:"";position:absolute;right:-90px;top:-90px;width:380px;height:380px;
+  border:1px solid rgba(244,239,227,.18);border-radius:50%;
+  box-shadow:0 0 0 40px rgba(244,239,227,.05),0 0 0 90px rgba(244,239,227,.04);
+}
+header.hero .kicker{font-size:12px;letter-spacing:.32em;opacity:.75;text-transform:uppercase}
+header.hero h1{font-size:38px;line-height:1.35;margin:14px 0 6px;font-weight:700;letter-spacing:.04em}
+header.hero h1 small{display:block;font-size:15px;font-weight:400;letter-spacing:.12em;opacity:.8;margin-top:10px}
+header.hero .meta{margin-top:26px;font-size:12.5px;opacity:.72;letter-spacing:.08em}
+/* ---------- nav ---------- */
+nav.toc{
+  position:sticky;top:0;z-index:50;background:rgba(247,244,236,.94);
+  backdrop-filter:blur(8px);border-bottom:1px solid var(--line);
+  padding:8px 16px;
+}
+nav.toc .search-wrap{
+  display:flex;align-items:center;gap:10px;margin:0 auto;max-width:1080px;
+}
+nav.toc .search-wrap .sb{font-size:13px;color:var(--ink3);white-space:nowrap}
+nav.toc .search-wrap input{flex:1;padding:8px 12px;border:1px solid var(--line);border-radius:6px;font-size:14px;font-family:inherit;background:#fff;outline:none}
+nav.toc .search-wrap input:focus{border-color:var(--accent)}
+nav.toc .search-wrap button{padding:7px 14px;background:var(--accent);color:#fff;border:none;border-radius:6px;cursor:pointer;font-size:13px}
+nav.toc .search-summary{font-size:12px;color:var(--ink3);margin-left:8px;white-space:nowrap}
+
+/* nav ul: left sidebar (desktop only) */
+nav.toc ul{
+  position:fixed;top:56px;left:12px;width:192px;max-height:calc(100vh - 70px);
+  overflow-y:auto;list-style:none;margin:0;padding:8px 6px;
+  background:rgba(247,244,236,.96);backdrop-filter:blur(8px);
+  border:1px solid var(--line);border-radius:8px;box-shadow:0 4px 16px rgba(0,0,0,.06);
+  z-index:49;
+}
+nav.toc li{margin:2px 0}
+nav.toc a{
+  display:block;white-space:nowrap;text-decoration:none;color:var(--ink2);
+  font-size:12px;padding:5px 10px;border-radius:5px;border:1px solid transparent;
+}
+nav.toc a:hover{background:#ebe5d6;color:var(--accent)}
+
+/* hero + body padding to account for sidebar */
+@media(min-width:1100px){
+  header.hero{padding-left:216px}
+  header.hero .wrap{margin:0 auto;padding-left:24px;max-width:1080px}
+  main{padding-left:216px}
+  main.wrap{margin:0 auto;padding-left:24px;max-width:1080px}
+  nav.toc .search-wrap{margin-left:216px}
+}
+@media(max-width:1099px){
+  nav.toc ul{position:static;width:auto;height:auto;max-height:none;display:flex;gap:6px;padding:6px 0;overflow-x:auto;background:transparent;border:none;box-shadow:none;margin-top:4px}
+  nav.toc a{padding:5px 11px;border-radius:999px}
+  header.hero{padding-left:0}
+  main{padding-left:0}
+  nav.toc .search-wrap{margin-left:auto}
+}
+/* ---------- sections ---------- */
+/* ---------- sections ---------- */
+main{padding:52px 0 90px}
+section.part{margin-bottom:64px}
+.part-head{display:flex;align-items:baseline;gap:16px;border-bottom:2px solid var(--accent);padding-bottom:10px;margin-bottom:28px}
+.part-head .no{font-size:12px;letter-spacing:.28em;color:var(--accent2);font-weight:700}
+.part-head h2{font-size:24px;margin:0;letter-spacing:.05em}
+.part-head .sub{margin-left:auto;font-size:12px;color:var(--ink3);letter-spacing:.08em}
+/* ---------- cards ---------- */
+.card{
+  background:var(--paper2);border:1px solid var(--line);border-radius:10px;
+  padding:24px 26px 20px;margin-bottom:16px;box-shadow:var(--shadow);
+  scroll-margin-top:70px;
+}
+.card h3{
+  font-size:17.5px;margin:0 0 12px;display:flex;align-items:baseline;gap:12px;
+  letter-spacing:.03em;line-height:1.5;
+}
+.card h3 .num{
+  font-family:Georgia,"Times New Roman",serif;font-size:13px;color:#fff;
+  background:var(--accent);border-radius:4px;padding:2px 7px;letter-spacing:.06em;flex:none;
+}
+.card h3 .pg{margin-left:auto;font-size:10.5px;color:var(--ink3);letter-spacing:.1em;font-weight:400;flex:none}
+.card ul{margin:0 0 12px;padding-left:1.25em}
+.card li{margin:4px 0}
+.card li::marker{color:var(--accent2)}
+.card b{color:var(--accent);font-weight:700}
+.card .terms{display:flex;flex-wrap:wrap;gap:6px;margin-top:12px;padding-top:12px;border-top:1px dashed var(--line)}
+.term{
+  font-size:11.5px;letter-spacing:.04em;color:var(--accent3);
+  background:#eef4ef;border:1px solid #cfdfd4;border-radius:4px;padding:2px 8px;
+}
+.tip{
+  margin-top:12px;font-size:13px;color:#5a4a2f;background:#f6efdc;
+  border-left:3px solid var(--gold);padding:8px 12px;border-radius:0 4px 4px 0;
+}
+.tip::before{content:"POINT";font-size:9.5px;letter-spacing:.2em;color:var(--gold);font-weight:700;margin-right:8px}
+/* ---------- tables ---------- */
+.tbl{width:100%;border-collapse:collapse;font-size:13px;background:var(--paper2);box-shadow:var(--shadow);border-radius:8px;overflow:hidden}
+.tbl th,.tbl td{border-bottom:1px solid var(--line);padding:9px 12px;text-align:left;vertical-align:top}
+.tbl thead th{background:#e9e2d2;font-weight:700;color:var(--ink);font-size:12px;letter-spacing:.06em;white-space:nowrap}
+.tbl tbody tr:nth-child(even){background:#faf7ef}
+.tbl td.c{text-align:center}
+.scroll{overflow-x:auto;margin:6px 0 4px}
+/* ---------- qa ---------- */
+.qa{border:1px solid var(--line);border-radius:8px;background:var(--paper2);margin-bottom:10px;overflow:hidden}
+.qa summary{cursor:pointer;padding:13px 16px;font-weight:700;font-size:14px;list-style:none;display:flex;gap:10px;align-items:baseline}
+.qa summary::-webkit-details-marker{display:none}
+.qa summary::before{content:"Q";font-family:Georgia,serif;color:var(--accent2);font-size:15px;flex:none}
+.qa summary:hover{background:#f3eee1}
+.qa .a{padding:0 18px 15px 38px;font-size:13.5px;color:var(--ink2);border-top:1px dashed var(--line);margin-top:0;padding-top:12px}
+.qa[open] summary{background:#f3eee1}
+/* ---------- misc ---------- */
+.lead{font-size:14.5px;color:var(--ink2);max-width:760px;margin:0 0 26px}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.note{font-size:12px;color:var(--ink3);margin-top:8px}
+.legend{display:flex;gap:18px;flex-wrap:wrap;font-size:12px;color:var(--ink3);margin-bottom:24px}
+.legend span::before{content:"";display:inline-block;width:9px;height:9px;border-radius:50%;margin-right:6px;background:var(--accent)}
+.legend span.l2::before{background:var(--accent2)}
+.legend span.l3::before{background:var(--accent3)}
+footer{border-top:1px solid var(--line);padding:26px 0 50px;font-size:11.5px;color:var(--ink3);letter-spacing:.06em;text-align:center}
+.exam{color:var(--accent2);font-weight:700;border-bottom:1px solid var(--accent2);padding-bottom:1px}
+.exambar{background:linear-gradient(90deg,var(--accent2) 0%,var(--accent2) var(--p,100%),#e9e2d2 var(--p,100%),#e9e2d2 100%);height:8px;border-radius:4px;margin:2px 0 4px}
+.examtbl td:first-child{font-weight:700;color:var(--accent2);white-space:nowrap}
+@media(max-width:720px){
+  .wrap{padding:0 16px}
+  header.hero h1{font-size:27px}
+  .grid2{grid-template-columns:1fr}
+  .card{padding:18px 18px 16px}
+  .part-head .sub{display:none}
+}
+@media print{
+  body{background:#fff;font-size:10.5pt}
+  nav.toc{display:none}
+  .card,.tbl{box-shadow:none;break-inside:avoid}
+  header.hero{background:#1f4e79 !important;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  section.part{break-before:page}
+}
+
+.houmon-note{font-size:12px;color:var(--ink3);border-top:1px dashed var(--line);margin-top:10px;padding-top:10px;line-height:1.7}
+.houmon-note ul{margin:4px 0 0;padding-left:1.4em}
+.houmon-note li{margin:3px 0 0}
+.houmon-note .y{color:var(--accent2);font-weight:700;margin-right:6px}
+.houmon-note .t{color:var(--accent);font-size:10.5px;border:1px solid var(--accent);border-radius:3px;padding:0 4px;margin-right:6px}
+.houmon-note .q{display:block;margin-top:2px}
+.houmon-note .a{display:block;margin-top:2px;color:#5a4a2f}
+
+.search-wrap{display:flex;align-items:center;gap:10px;margin-bottom:12px;padding:10px 14px;background:linear-gradient(135deg,#f7f4ec,#efe9da);border:1px solid var(--line);border-radius:8px;box-shadow:0 1px 3px rgba(0,0,0,.04)}
+.search-wrap input{flex:1;padding:8px 12px;border:1px solid var(--line);border-radius:6px;font-size:14px;font-family:inherit;background:#fff;outline:none;transition:border-color .15s}
+.search-wrap input:focus{border-color:var(--accent);box-shadow:0 0 0 3px rgba(200,150,50,.12)}
+.search-wrap .sb{font-size:13px;color:var(--ink3);white-space:nowrap}
+.search-wrap button{padding:7px 14px;background:var(--accent);color:#fff;border:none;border-radius:6px;cursor:pointer;font-size:13px;transition:opacity .15s}
+.search-wrap button:hover{opacity:.85}
+.search-hit{background:#fff7c2;color:#7a4f00;padding:0 2px;border-radius:2px;box-shadow:0 0 0 1px #e8c96b}
+.card.search-hidden{display:none !important}
+.card.search-shown{display:block}
+.search-summary{font-size:12px;color:var(--ink3);margin-left:auto}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="kicker">都市計画とまちづくりがわかる本</div>
+    <h1>都市計画がわかる<small>総復習ノート</small></h1>
+    <div class="meta">作者：sudadada</div>
+  </div>
+</header>
+
+<nav class="toc">
+  <div class="search-wrap">
+    <span class="sb">🔍 検索</span>
+    <input id="kwsearch" type="search" placeholder="キーワードを入力… 例：ハワード、景観法、区域区分、PFI" autocomplete="off">
+    <span class="search-summary" id="searchSum"></span>
+    <button onclick="clearSearch()">クリア</button>
+  </div>
+  <ul>
+    <li><a href="#guide">使い方</a></li>
+    <li><a href="#p1">Ⅰ 歴史と思想</a></li>
+    <li><a href="#p2">Ⅱ 日本の歩み</a></li>
+    <li><a href="#p3">Ⅲ 建築基準法</a></li>
+    <li><a href="#p4">Ⅳ 都市計画法</a></li>
+    <li><a href="#p5">Ⅴ 現代と世界</a></li>
+    <li><a href="#chrono">年表</a></li>
+    <li><a href="#people">人物</a></li>
+    <li><a href="#compare">制度比較</a></li>
+    <li><a href="#glossary">用語集</a></li>
+    <li><a href="#p6">Ⅵ まちづくりの担い手</a></li>
+    <li><a href="#p7">Ⅶ 分野別まちづくり</a></li>
+    <li><a href="#p8">Ⅷ 実践と現代課題</a></li>
+    <li><a href="#p9">Ⅸ これからのまちづくり</a></li>
+    <li><a href="#koumon">過去問分析</a></li>
+  </ul>
+</nav>
+
+<main class="wrap">
+
+<!-- ============ 使い方 ============ -->
+<section class="part" id="guide">
+  <div class="part-head"><span class="no">GUIDE</span><h2>この資料の使い方</h2></div>
+  <p class="lead">第1章は「<b>都市計画の思想史</b>」と「<b>日本の法制度（建築基準法・都市計画法）</b>」という性格の異なる二本柱で構成されています。前者は人物・著書・都市名を、後者は<b>法令名・年号・数値基準</b>をセットで覚えるのが最短ルートです。</p>
+  <div class="grid2">
+    <div class="card" style="margin:0">
+      <h3><span class="num">01</span>出題されやすい3類型</h3>
+      <ul>
+        <li><b>人物－著書－概念</b>：ハワード＝田園都市、ペリー＝近隣住区、ジェイコブス＝多様性の4条件。</li>
+        <li><b>法令－年号－内容</b>：1919年都市計画法、1968年都市計画法、1980年地区計画、2004年景観法。</li>
+        <li><b>数値</b>：接道義務4m・2m、建ぺい率・容積率、開発許可の面積要件、用途地域13種類。</li>
+      </ul>
+    </div>
+    <div class="card" style="margin:0">
+      <h3><span class="num">02</span>暗記の順序</h3>
+      <ul>
+        <li>まず<b>全体マップ</b>で全9部の流れをつかむ。</li>
+        <li>各節カードの<b>POINT</b>だけを通読（15分）。</li>
+        <li>年表で「法制度の転換点」を確認。</li>
+        <li>最後に<b>東科大過去問分析</b>で出題傾向と頻出ポイントを確認する。</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 全体マップ ============ -->
+<section class="part" id="map">
+  <div class="part-head"><span class="no">MAP</span><h2>全体マップ</h2><span class="sub">60節の位置関係</span></div>
+  <div class="scroll">
+  <table class="tbl">
+    <thead><tr><th>部</th><th>節</th><th>テーマ</th><th>キーワード</th></tr></thead>
+    <tbody>
+      <tr><td class="c">Ⅰ</td><td class="c">01–09</td><td>都市計画の歴史と思想（海外）</td><td>古代都市／ルネサンス／バロック／田園都市／近隣住区／ニュータウン／近代建築／ゲデス／ジェイコブス</td></tr>
+      <tr><td class="c">Ⅱ</td><td class="c">10–15</td><td>日本の都市計画の歩み</td><td>条坊制／城下町／市区改正／1919年法／戦災復興／1968年法／地区計画／2000年代</td></tr>
+      <tr><td class="c">Ⅲ</td><td class="c">16–21</td><td>建築基準法の基礎</td><td>単体規定／集団規定／接道義務／建ぺい率・容積率／高さ制限／建築確認／倫理</td></tr>
+      <tr><td class="c">Ⅳ</td><td class="c">22–30</td><td>都市計画法のしくみ</td><td>マスタープラン／線引き／地域地区／開発許可／都市計画事業／地区計画／決定手続</td></tr>
+      <tr><td class="c">Ⅴ</td><td class="c">31–40</td><td>世界の制度と現代の課題</td><td>アメリカ／イギリス／ドイツ／フランス／サステイナビリティ／ニューアーバニズム／コンパクトシティ／ガバナンス／条例</td></tr>
+      <tr><td class="c">Ⅵ</td><td class="c">41–44</td><td>まちづくりの担い手とルール</td><td>4類型の担い手／まちづくり条例／協働（パートナーシップ）／非成長型社会の課題</td></tr>
+      <tr><td class="c">Ⅶ</td><td class="c">45–50</td><td>分野別まちづくり</td><td>景観法／歴史的まちづくり／防災まちづくり／交通まちづくり（TDM・TOD・ボンエルフ）／福祉まちづくり／環境まちづくり</td></tr>
+      <tr><td class="c">Ⅷ</td><td class="c">51–56</td><td>まちづくりの実践と現代課題</td><td>中心市街地再生（TMO）／土地区画整理・再開発／市民参加（ワークショップ）／NPOと財源／コンパクトシティ・立地適正化計画／都市再生</td></tr>
+      <tr><td class="c">Ⅸ</td><td class="c">57–60</td><td>まちづくりのこれから</td><td>内発的発展／城下町の現代性／環境共生・スマートシティ／東京の将来像／建築との接点</td></tr>
+    </tbody>
+  </table>
+  </div>
+  <p class="note">※ 教科書の頁は各カード右上に表示。本文の「見出し番号（01〜60）」は教科書の節番号に対応しています。</p>
+</section>
+
+<!-- ============ 第Ⅰ部 ============ -->
+<section class="part" id="p1">
+  <div class="part-head"><span class="no">PART Ⅰ</span><h2>都市計画の歴史と思想</h2><span class="sub">01–09 ／ 海外の系譜</span></div>
+  <p class="lead">「よい都市とは何か」という問いへの回答が、時代ごとに積み重なって現在の都市計画があります。人物・都市・著書の3点セットで押さえましょう。</p>
+
+  <div class="card" id="s01">
+    <h3><span class="num">01</span>古代の都市<span class="pg">pp.016–017</span></h3>
+    <ul>
+      <li>都市の成立条件は、<b>農業生産の余剰</b>、余剰を分配する行政・経済のしくみ、そして城壁・神殿・役所などの<b>公共施設</b>（余剰を集めるしくみ）。</li>
+      <li>メソポタミアでは灌漑技術を背景に、紀元前4千年紀に<b>都市国家</b>と都市間ネットワークが成立。文字・暦・数学・法典を生んだ。代表都市は<b>ウルク・ウル</b>。</li>
+      <li><b>ジッグラト</b>＝方形平面の階段状ピラミッド型神殿。豊穣祈願の場であると同時に、洪水時の避難所でもあった。</li>
+      <li>ギリシアの<b>ポリス</b>（前8世紀頃）は、<b>アクロポリス</b>（神域・要塞・避難所）と<b>アゴラ</b>（広場、列柱廊<b>ストア</b>）を中心に、民主政を支えた。植民都市には<b>ヒポダモス式</b>の基盤目状プランが用いられた。</li>
+      <li>ローマはギリシアの都市計画を継承し、石材コンクリートとアーチ・ヴォールト・ドームを発達させた。<b>コロッセウム</b>（長径188m）、<b>パンテオン</b>（高さ43m）、<b>フォルム</b>（広場）が代表。帝政期1〜2世紀が最盛期。</li>
+      <li><b>ポンペイ</b>は79年のヴェスヴィオ火山噴火で埋没し、18世紀に発掘。直交2街路のグリッド、歩車道分離断面、フォルム構成、商店・住宅内部まで保存され、当時の都市生活を知る一次資料となっている。</li>
+    </ul>
+    <div class="tip">V.ゴードン・チャイルド「都市革命」（1950）の10指標（規模・非農業的居住者・租税・記念建造物・支配階級・文字・科学技術・芸術・長距離交易・専門工人）は、都市の定義として頻出。</div>
+    
+<div class="houmon-note"><b style="color:var(--gold);letter-spacing:.1em">過去問の出題</b><ul><li><span class="y">20258</span><span class="t">選択</span><span class="q">「ポリス」概念（古代ギリシアの都市国家）は都市計画思想史の原点</span><span class="a">→ 頻出。古代都市の成立条件とセットで問われることあり</span></li></ul></div>
+</div>
+
+  <div class="card" id="s02">
+    <h3><span class="num">02</span>中世・ルネサンスの都市<span class="pg">pp.018–019</span></h3>
+    <ul>
+      <li>中世都市は10世紀以降のローマ都市生活の復興にはじまり、11〜12世紀の農業技術革新と地中海海洋都市の出現で発展。人口は数千人規模。</li>
+      <li>城壁・市場・教会・市庁舎・広場がセットになり、<b>自治都市</b>として成長。人口増加に伴い城壁の外へ拡張した。</li>
+      <li>ルネサンス（15世紀フィレンツェ）では、建築家が職人から<b>製図家・設計者</b>へと変わり、<b>透視図法・遠近法</b>が空間設計の道具となった。</li>
+      <li>求心的・閉鎖的な広場と都市美が志向され、ウィトルウィウス『建築十書』が規範化。アルベルティらが理想都市論を展開した。</li>
+      <li>ただしルネサンスの都市計画は、都市全体を一挙に造り変えるものではなく、<b>教会堂・広場・パラッツォなど個別施設の整備</b>が中心であった。</li>
+    </ul>
+    <div class="tip">「中世＝有機的・自然発生的」「ルネサンス＝幾何学・遠近法・個別施設」「バロック＝軸と演出」という3段階の対比で覚える。</div>
+    
+  </div>
+
+  <div class="card" id="s03">
+    <h3><span class="num">03</span>バロックの都市<span class="pg">pp.020–021</span></h3>
+    <ul>
+      <li>バロックは17世紀の芸術様式。絶対主義の権力を背景に、<b>大がかりで劇的な空間演出</b>を行う都市計画へと展開した。</li>
+      <li>ルネサンスが都市全体の構成をめざしたのに対し、バロックは<b>建築物の配置・軸・広場・オベリスク</b>によって空間を演出する点に特徴がある。</li>
+      <li>ローマでは<b>シクストゥス5世</b>（1585–90）が、オベリスクを目標点として直線道路で結ぶ都市改造を行った。</li>
+      <li>パリではルイ14世が<b>ヴェルサイユ宮殿</b>を造営し、都市軸を形成。19世紀後半には<b>オスマン</b>が第二帝政下でパリ改造（直線・放射状街路、上下水道、公園、街路樹）を実施した。</li>
+      <li>ウィーンでは1857年、皇帝フランツ・ヨーゼフの決定で城壁を撤去し、<b>リングシュトラーセ</b>（環状道路）沿いに公共建築を配置。</li>
+      <li>ワシントンDCは1791年、<b>ピエール・ランファン</b>の設計による放射状街路＋グリッド。バロックの影響はカールスルーエ、サンクトペテルブルクにも及んだ。</li>
+    </ul>
+    <div class="tip">オスマンのパリ改造は「近代都市計画の先駆」とされるが、同時に住民の排除という批判も伴う。衛星都市構想もここに起源をもつ。</div>
+    
+<div class="houmon-note"><b style="color:var(--gold);letter-spacing:.1em">過去問の出題</b><ul><li><span class="y">20258</span><span class="t">選択</span><span class="q">パリで19世紀に都市改造を実施した人物は誰か</span><span class="a">→ 正解：オスマン（第2帝政期、1850年代～）</span></li><li><span class="y">H23-1</span><span class="t">選択</span><span class="q">バロック期の都市計画に関する問い</span><span class="a">→ 正解：絶対主義のもと、直線道路・オベリスク・軸と演出が特徴</span></li></ul></div>
+</div>
+
+  <div class="card" id="s04">
+    <h3><span class="num">04</span>理想工業村と田園都市論<span class="pg">pp.022–023</span></h3>
+    <ul>
+      <li>近代都市計画は、<b>工業化に伴う労働者住宅・住環境の悪化</b>に対する実現可能な手段としてイギリスで始まった。</li>
+      <li><b>ロバート・オーウェン</b>（1771–1858）はニューラナークの紡績工場で、自主管理、賃金・労働時間、住宅・街路の改善、児童労働の制限、幼児教育を実践。約1,200人規模の共同体で、農工業の融合、共同菜園・学校・病院を中心に、外側に工場・耕地を配置した。その思想は<b>パターナリズム</b>と評され、失敗後は協同組合運動へ引き継がれた。</li>
+      <li><b>エベネザー・ハワード</b>（1850–1928）『明日の田園都市』1898（Tomorrow: A Peaceful Path to Real Reform）。19世紀末のロンドンは50年間で3倍、600万人超に膨張し、スラム・煤煙・汚水が深刻化していた。</li>
+      <li>田園都市の原則は、<b>田園の永久保有と都市拡大の抑制、土地利用規制、人口規模の計画的制限、開発利益の地域還元、産業の確保、住民の自由と協働</b>。</li>
+      <li>構成は、中心に公共施設・公園、その周りに住宅、外周に工場・倉庫・農地。市街地1,000エーカー＋農地5,000エーカー、人口3万2,000人で、超過分は新たな田園都市へ移す（<b>スプロールを許さない</b>）。</li>
+      <li>1903年<b>レッチワース</b>（設計：レイモンド・アンウィン）、1920年<b>ウェリン・ガーデン・シティ</b>。レッチワースはロンドン北55km、ハートフォードシャーに位置する英国初の田園都市。</li>
+    </ul>
+    <div class="tip">田園都市の本質は「絵に描いた理想郷」ではなく、<b>土地の共同保有＋人口上限＋職住一体</b>という制度設計にある。この3点がニュータウン政策へ継承された。</div>
+    
+<div class="houmon-note"><b style="color:var(--gold);letter-spacing:.1em">過去問の出題</b><ul><li><span class="y">exam_arch_20248</span><span class="t">選択</span><span class="q">大ロンドン計画（1944、アーバークロンビー）の特徴として不適切なもの</span><span class="a">→ 正解：エ スラム・クリアランス（同計画はニュータウン＋グリーンベルト＋拡張都市が3本柱）</span></li></ul></div>
+</div>
+
+  <div class="card" id="s05">
+    <h3><span class="num">05</span>近隣住区論とラドバーン<span class="pg">pp.024–025</span></h3>
+    <ul>
+      <li>20世紀のアメリカでは人口と自動車が急増。都市の拡大に対応する単位として<b>近隣住区（neighborhood unit）</b>が考案された。</li>
+      <li><b>クラレンス・ペリー</b>（1872–1944）の近隣住区論（1924、ニューヨーク地域計画委員会）。<b>小学校とコミュニティセンターを核</b>とし、徒歩圏、通過交通の排除、外周に商店・公共施設、道路網の計画的な構成を6原則として整理した。</li>
+      <li>日本でも小学校区単位の住宅市街地計画に影響を与えた。</li>
+      <li><b>ラドバーン方式</b>：<b>スーパーブロック＋クルドサック（cul-de-sac）</b>により歩車を分離する手法。1928年、ニュージャージー州ラドバーンで<b>クラレンス・スタイン</b>と<b>ヘンリー・ライト</b>が設計。1929年の恐慌で計画は縮小した。</li>
+      <li>歩車分離の考え方は、その後の団地計画・ニュータウン計画の基本となった。</li>
+    </ul>
+    <div class="tip">近隣住区論＝「小学校区＋徒歩圏＋通過交通排除」。ラドバーン＝「スーパーブロック＋クルドサック＋歩車分離」。この2語を混同しない。</div>
+    
+<div class="houmon-note"><b style="color:var(--gold);letter-spacing:.1em">過去問の出題</b><ul><li><span class="y">H26-1</span><span class="t">穴埋め</span><span class="q">高度成長期大規模ニュータウンで採用された、小学校1校分の人口を単位とする方式</span><span class="a">→ 正解：近隣住区方式（ペリーの concept）</span></li></ul></div>
+</div>
+
+  <div class="card" id="s06">
+    <h3><span class="num">06</span>グリーンベルトとニュータウン<span class="pg">pp.026–027</span></h3>
+    <ul>
+      <li>1924年アムステルダム国際都市計画会議の大都市計画7原則＝<b>無制限膨張の否定、計画的成長、グリーンベルト、自動車交通対応、地域計画、柔軟性、実行性</b>。</li>
+      <li><b>グリーンベルト</b>は既成市街地の周囲に設ける緑地帯（農地・公園・森林）で、幅10〜20km。都市の膨張を止める「壁」として機能する。</li>
+      <li><b>大ロンドン計画</b>（1944）は、内部市街地リング／郊外リング／グリーンベルト・リング／外部田園リングの4リングからなる。工場移転と人口減、スプロール防止をめざした。</li>
+      <li>イギリスのニュータウンは3期に分かれる。<b>第1期</b>（1946〜）＝ロンドン周辺8都市、計画人口2〜6万人、近隣住区論＋ラドバーン。<b>第2期</b>（1950年代後半〜60年代）＝スコットランド・ランカシャー等、センター・システム。<b>第3期</b>（1960年代後半〜）＝ミルトン・キーンズ等の大規模都市。</li>
+      <li>根拠法は<b>ニュータウン法</b>（1946）。日本では千里ニュータウン（1961）、多摩ニュータウン（1965）などが建設された。</li>
+    </ul>
+    <div class="tip">グリーンベルトは「線」ではなく「面」で都市を囲い込む構想。日本では首都圏整備法のグリーンベルト構想が実現せず、1965年改正で近郊整備地帯へ転換した点が対比される。</div>
+    
+<div class="houmon-note"><b style="color:var(--gold);letter-spacing:.1em">過去問の出題</b><ul><li><span class="y">20258</span><span class="t">選択</span><span class="q">大規模ニュータウン計画・グリーンベルトに関連する出題（ハワード＝明日の田園都市、グリーンベルト、人口3万2,000人）</span><span class="a">→ 頻出セット：ハワード＋田園都市＋3万2千人／レッチワース（1903、世界初田園都市）</span></li><li><span class="y">exam_arch_20248</span><span class="t">選択</span><span class="q">大ロンドン計画の3本柱として「ニュータウン」「グリーンベルト」「拡張都市」が挙げられる</span><span class="a">→ 補足：スラム・クリアランスは同計画の特徴ではない</span></li></ul></div>
+</div>
+
+  <div class="card" id="s07">
+    <h3><span class="num">07</span>ライトとコルビュジエ<span class="pg">pp.028–029</span></h3>
+    <ul>
+      <li>シカゴでは鉄骨・鉄筋コンクリートによる高層ビルが発達し、<b>シカゴ派</b>が形成された。ルイス・サリヴァンが代表。</li>
+      <li><b>フランク・ロイド・ライト</b>（1867–1959）はプレーリー・ハウスなど<b>有機的建築</b>を実践。1932年『Disappearing City』で<b>ブロードエーカー・シティ</b>（1人1エーカー、自動車前提の低密度分散）を提示した。</li>
+      <li><b>ル・コルビュジエ</b>（1887–1965）は1922年「300万人の現代都市」で、超高層ビル＋高速道路＋緑地、歩車分離、立体交差を構想。1925年「ヴォアザン計画」ではパリ中心部の高層化を提案した。</li>
+      <li>1933年<b>CIAM第4回アテネ会議</b>で<b>アテネ憲章</b>を採択。都市の4機能＝<b>居住・余暇・労働・交通</b>。1935年『輝く都市』。</li>
+      <li>ライトの「分散」とコルビュジエの「集中」は正反対に見えるが、ともに<b>自動車時代の都市</b>を前提に、既存の街路・街区を解体する点で共通する。後のジェイコブスの批判対象となる。</li>
+    </ul>
+    <div class="tip">CIAMは1928年結成。アテネ憲章＝機能主義都市計画の聖典。4機能（住・遊・働・交通）は暗記必須。</div>
+    
+<div class="houmon-note"><b style="color:var(--gold);letter-spacing:.1em">過去問の出題</b><ul><li><span class="y">2019</span><span class="t">選択</span><span class="q">CIAM（国際現代建築会議）とアテネ憲章（1933、4つの機能＝居住・労働・遊憩・交通）</span><span class="a">→ 頻出セット。20258の小論文語群にもCIAMが含まれている</span></li></ul></div>
+</div>
+
+  <div class="card" id="s08">
+    <h3><span class="num">08</span>ゲデスとアンウィン<span class="pg">pp.030–031</span></h3>
+    <ul>
+      <li><b>パトリック・ゲデス</b>（1854–1932）は生物学・社会科学を基礎に、<b>都市を有機体</b>として捉え、地域調査と総合計画を重視した。『Cities in Evolution』1915。<b>バレー・セクション</b>（谷断面）による地域分析で知られる。</li>
+      <li><b>ルイス・マンフォード</b>（1895–1990）はゲデスの影響を受け、『都市の文化』1938、『都市の歴史』1961で自動車都市を批判した。</li>
+      <li><b>レイモンド・アンウィン</b>（1863–1940）は『Town Planning in Practice』1909を著し、<b>レッチワース</b>、<b>ハムステッド田園郊外</b>（1907）を設計。近隣住区論の源流とされる。</li>
+      <li>1923年アメリカ地域計画協会（スタイン、ライト、マンフォードら）が結成され、<b>サニーサイド・ガーデンズ</b>（ニューヨーク、クイーンズ）につながった。</li>
+    </ul>
+    <div class="tip">ゲデス＝「調査なくして計画なし」「都市は有機体」。アンウィン＝「田園都市の実務家」。マンフォード＝「都市の歴史家・文明批評家」。役割で区別する。</div>
+    
+<div class="houmon-note"><b style="color:var(--gold);letter-spacing:.1em">過去問の出題</b><ul><li><span class="y">20258</span><span class="t">選択</span><span class="q">ゲデス（パトリック・ゲデス）の都市美運動に関する記述として誤りはどれか</span><span class="a">→ 正解：イ 「第二次世界大戦後のアメリカで活発となった」→ゲデスはスコットランドの社会学者（1854–1932）、『都市の進化』（1915）</span></li></ul></div>
+</div>
+
+  <div class="card" id="s09">
+    <h3><span class="num">09</span>ジェイコブスとアレクサンダー<span class="pg">pp.032–033</span></h3>
+    <ul>
+      <li><b>ジェイン・ジェイコブス</b>（1916–2006）『アメリカ大都市の死と生』1961。低密度郊外、用途の純化、自動車優先、スーパーブロックからなる近代都市計画を根本的に批判した。</li>
+      <li>都市の多様性を生む<b>4条件</b>＝①<b>用途の混合</b> ②<b>小さい街区</b> ③<b>古い建物</b> ④<b>十分な密度</b>。これらが揃うと街路に人の流れが生まれ、安全と活力が保たれる。</li>
+      <li><b>クリストファー・アレクサンダー</b>（1936–2022）「都市はツリーではない」1965。都市を<b>セミラティス（半格子）構造</b>として捉え、樹状的で階層的な計画を批判した。</li>
+      <li>『パタン・ランゲージ』1977、『時を超えた建設の道』1979。住民が自ら環境を建て替えていく「生成のプロセス」を重視。</li>
+    </ul>
+    <div class="tip">ジェイコブスの4条件は順番も含めて頻出。アレクサンダーの「ツリー vs セミラティス」は、計画の構造論として対比で問われる。</div>
+    
+  </div>
+</section>
+
+<!-- ============ 第Ⅱ部 ============ -->
+<section class="part" id="p2">
+  <div class="part-head"><span class="no">PART Ⅱ</span><h2>日本の都市計画の歩み</h2><span class="sub">10–15 ／ 前近代〜2000年代</span></div>
+  <p class="lead">日本の都市計画は「<b>外来制度の導入</b>」と「<b>地域の実情への調整</b>」の繰り返しで発展してきました。1919年・1968年・1980年・2000年という4つの転換点を軸に整理します。</p>
+
+  <div class="card" id="s10">
+    <h3><span class="num">10</span>近世までの都市計画<span class="pg">pp.034–035</span></h3>
+    <ul>
+      <li>古代の日本は<b>中国の都城制</b>を範とし、<b>藤原京</b>（694、日本最古の条坊制都市）→<b>平城京</b>（710）→<b>長岡京</b>（784）→<b>平安京</b>（794）へ遷都した。</li>
+      <li><b>条坊制</b>は方格状に街区を割る計画手法。貴族に身分に応じた宅地を割り当てる<b>身分制都市</b>であり、政治支配の舞台であった。</li>
+      <li>一方、庶民の生活から成立した都市として<b>寺内町</b>などがある。都市の成立には水運・馬借による物流が不可欠で、室町期の京都では<b>町衆</b>の自治が成立した。</li>
+      <li>中世都市は支配者の系譜から①<b>港町</b> ②<b>門前町</b> ③<b>寺内町</b> ④<b>宿場町</b>に分類され、多様な都市が併存した。中世の大規模計画は宗教的・呪術的要素が強い。</li>
+      <li>近世には<b>織田信長の安土城</b>（1576）、豊臣秀吉の大坂城を経て<b>城下町</b>が発達。城郭を中心に<b>武家地・町人地・寺社地</b>を配置し、防衛のため寺院を集めた<b>寺町</b>、敵を迷わせる街路配置を採った。</li>
+      <li>幕藩体制下では幕府直轄都市（天領都市）と藩の城下町が並立し、城下町が最も発達。18世紀の<b>江戸</b>は人口100万人超（当時世界最大級）で、<b>三都＝江戸・大坂・京</b>。明暦の大火（1657）後の大改造で火除け地・広小路・寺院移転が行われ、堀川・上水道が整備された。</li>
+    </ul>
+    <div class="tip">「条坊制→寺内町→門前町→城下町」という都市類型の変化を、支配の論理（政治・宗教・商業）とセットで説明できるようにする。</div>
+    
+<div class="houmon-note"><b style="color:var(--gold);letter-spacing:.1em">過去問の出題</b><ul><li><span class="y">exam_arch_20228</span><span class="t">選択</span><span class="q">日本の古代都市＝城下町・条坊制・藤原京・平城京・平安京</span><span class="a">→ 年代順・制度比較で問われる。城下町は中世以降、条坊制は律令制期</span></li></ul></div>
+</div>
+
+  <div class="card" id="s11">
+    <h3><span class="num">11</span>幕末・明治の都市計画<span class="pg">pp.036–037</span></h3>
+    <ul>
+      <li>安政の五か国条約・日米修好通商条約（1858）により函館・神奈川・長崎・新潟・兵庫が開港。<b>横浜</b>（1859開港）は東海道から離れた寒村だったが居留地が造成され、イギリス人技師<b>R.ブラント</b>の「日本大通り」がつくられた。横浜居留地は<b>「日本の近代都市計画の出発点」</b>とされる。</li>
+      <li>1868年に江戸を東京と改称。市域の約6割を占めた武家地・大名屋敷跡地は、軍用地・官庁・学校・公園などへ転用された。</li>
+      <li><b>銀座煉瓦街</b>：1872年の銀座・築地の大火（2,900戸）後、<b>T.J.ウォートルス</b>の設計による煉瓦造2階建て・アーケード・ガス灯の街並み。ジョサイア・コンドルも近代建築の導入に貢献。</li>
+      <li><b>東京市区改正</b>：1884年内務省に市区改正審査局を設置し、ドイツ人技術者<b>エンデ＆ベックマン</b>を招聘（1886–87）。1888年<b>「東京市区改正条例」</b>公布・東京市区改正設計は<b>日本最初の近代的都市計画</b>で、道路・下水・公園・河川を対象とした。1889年には東京市制。</li>
+      <li>大阪は1872年の大火後、町人地の不燃化を推進。大阪市会の建議を経て1898年に大阪市第1回市区改正を実施。</li>
+      <li>京都は東京奠都で人口が減少する一方、<b>琵琶湖疏水</b>（1890）、平安遷都1100年記念事業（1895）など近代化事業を行った。</li>
+      <li>1919年<b>都市計画法・市街地建築物法</b>。1923年<b>関東大震災</b>後の震災復興計画（区画整理・復興小学校）、1939年<b>東京緑地計画</b>、1940年都市計画法改正（緑地を都市計画施設に位置づけ）。</li>
+    </ul>
+    <div class="tip">「市区改正＝東京・大阪の道路・下水・公園」「1919年法＝都市計画区域・用途地域」「1923年＝震災復興」の3層で覚える。</div>
+    
+<div class="houmon-note"><b style="color:var(--gold);letter-spacing:.1em">過去問の出題</b><ul><li><span class="y">exam_arch_20228</span><span class="t">選択</span><span class="q">東京市区改正条例（1888）と銀座煉瓦街・市区改正の出題</span><span class="a">→ 市区改正は近代日本初の都市計画事業。エンデ＆ベックマン案の修正版</span></li><li><span class="y">exam_arch_20248</span><span class="t">選択</span><span class="q">日本都市計画・開発の着手年度を古い順に並べる：銀座煉瓦街（1872）→明治神宮外苑造営（1926）→同潤会代官山（1927）→新宿歌舞伎町区画整理（1930）</span><span class="a">→ 正解：ア B→D→C→A</span></li></ul></div>
+</div>
+
+  <div class="card" id="s12">
+    <h3><span class="num">12</span>大正・昭和戦前の都市計画<span class="pg">pp.038–039</span></h3>
+    <ul>
+      <li>大正デモクラシー期から戦間期にかけて、日本の都市計画の枠組みが形成された。</li>
+      <li><b>1919年（大正8年）都市計画法・市街地建築物法</b>。都市計画法は当初<b>6大都市</b>（東京・横浜・名古屋・京都・大阪・神戸）を中心に適用され、市街地建築物法は全国に適用。用途地域の考え方が導入された。</li>
+      <li><b>1923年 関東大震災</b>。同年9月に<b>帝都復興院</b>（総裁：後藤新平）を設置し、1924年に復興局へ。震災復興計画では区画整理、復興小学校、公園・小公園が整備された。</li>
+      <li><b>同潤会</b>（1923）は不良住宅地区の改良と公営住宅の先駆け。鉄筋コンクリート造の同潤会アパートはその代表。</li>
+      <li>大阪でも区画整理や低湿地の埋立が進み、名古屋・京都・神戸も市区改正・都市計画事業を展開した。</li>
+      <li>1937年<b>防空法</b>。1939年<b>東京緑地計画</b>（緑地帯・防空空地帯）。1940年都市計画法改正で「緑地」が都市計画施設として位置づけられた。</li>
+    </ul>
+    <div class="tip">戦前の都市計画は「都市計画法（6大都市）＋市街地建築物法（全国）」の二本立て。震災復興がその実践の場となった。</div>
+    
+<div class="houmon-note"><b style="color:var(--gold);letter-spacing:.1em">過去問の出題</b><ul><li><span class="y">20258</span><span class="t">選択</span><span class="q">関東大震災後の帝都復興：復興院（後藤新平総裁）が帝都復興計画を推進</span><span class="a">→ 頻出。関東大震災1923＋同潤会＋帝都復興院の3点セット</span></li><li><span class="y">exam_arch_20248</span><span class="t">小論文</span><span class="q">同潤会代官山アパートメント建設年代の並び替え</span><span class="a">→ 同潤会＝関東大震災後の復興住宅事業体（1924–1941）</span></li></ul></div>
+</div>
+
+  <div class="card" id="s13">
+    <h3><span class="num">13</span>昭和戦後の都市計画<span class="pg">pp.040–041</span></h3>
+    <ul>
+      <li><b>戦災復興</b>：115都市が戦災都市に指定され、1945年12月に<b>戦災復興院</b>を設置、1946年に戦災復興基本方針を策定。土地区画整理を基幹に道路・公園・緑地を計画したが、1949年のドッジ・ラインによる財政縮小で大幅に縮小された。</li>
+      <li><b>大都市圏計画</b>：1956年<b>首都圏整備法</b>（1958年首都圏整備計画、グリーンベルト構想）、1963年<b>近畿圏整備法</b>、1966年<b>中部圏開発整備法</b>。グリーンベルトは実現せず、1965年改正で<b>近郊整備地帯</b>へ転換した。</li>
+      <li>1955年<b>日本住宅公団</b>。1963年<b>新住宅市街地開発法</b>を背景に、千里ニュータウン（1962）、多摩ニュータウン（1965）などが建設された。</li>
+      <li>1960年代の高度経済成長で大都市へ人口が集中し、スプロール・公害が深刻化。1968年<b>都市計画法（新法）</b>、1969年<b>都市再開発法</b>、1970年建築基準法改正（容積率の全国導入）。</li>
+      <li>1968年法の4本柱＝①<b>区域区分（線引き）</b> ②<b>開発許可制度</b> ③<b>用途地域の全国化</b> ④<b>都市計画決定の都道府県移管</b>。</li>
+      <li>1970年代は1972年都市計画法改正、1975年大都市地域住宅地供給促進特別措置法、1976年都市計画法改正を経て、1980年の地区計画制度創設へ向かう。</li>
+    </ul>
+    <div class="tip">1968年法の意義は「都市計画の全国化」と「開発コントロールの実効性確保」。線引き＋開発許可はセットで理解する。</div>
+    
+<div class="houmon-note"><b style="color:var(--gold);letter-spacing:.1em">過去問の出題</b><ul><li><span class="y">exam_arch_20248</span><span class="t">選択</span><span class="q">1919年都市計画法と市街地建築物法で制度化された計画技術はどれか</span><span class="a">→ 正解：ア 建築線制度（イ 区域区分は1968年法、ウ 耕地整理は農業、エ 地区計画は1980年）</span></li></ul></div>
+</div>
+
+  <div class="card" id="s14">
+    <h3><span class="num">14</span>1980年代・1990年代の都市計画<span class="pg">pp.042–043</span></h3>
+    <ul>
+      <li><b>1980年都市計画法改正</b>で<b>地区計画制度</b>を創設（1981年施行）。全国一律の規制への反省から、地域特性に応じたきめ細かな規制・誘導へ転換した。神戸市まちづくり条例がモデル。</li>
+      <li><b>地方分権</b>：1999年<b>地方分権一括法</b>。2000年都市計画法改正で、都市計画決定権限を都道府県から<b>市町村へ移譲</b>し、<b>準都市計画区域</b>を創設した。</li>
+      <li>1992年都市計画法改正で<b>市町村の都市計画マスタープラン</b>を制度化。1998年には用途地域の用途規制を合理化。1999年建築基準法の<b>性能規定化</b>。</li>
+      <li>1990年代後半からの規制緩和の流れは、2002年<b>都市再生特別措置法</b>へつながる。</li>
+      <li><b>中心市街地の衰退</b>に対し、1998年に<b>中心市街地活性化法</b>・<b>大規模小売店舗立地法</b>（<b>まちづくり三法</b>）を制定。2006年の三法改正では郊外大型店の立地を規制した。</li>
+    </ul>
+    <div class="tip">1980年＝地区計画（住民参加・地域特性）、2000年＝地方分権（市町村決定・準都市計画区域）。この2つが90年代以降のキーワード。</div>
+    
+<div class="houmon-note"><b style="color:var(--gold);letter-spacing:.1em">過去問の出題</b><ul><li><span class="y">20258</span><span class="t">選択</span><span class="q">現行都市計画法の地区計画に関する記述として誤りはどれか</span><span class="a">→ 正解：ウ 「土地所有者全員の合意が必要」→地区計画は市町村が定める。メリット：規制強化も緩和も可、地区施設配置可能</span></li><li><span class="y">20258</span><span class="t">選択</span><span class="q">都市計画制度導入年代順：都市計画区域（1968）→市町村マスタープラン（1980）→都市再生特別地区（2002）→田園住居地域（2018）</span><span class="a">→ 正解：ア ①→④→③→②</span></li></ul></div>
+</div>
+
+  <div class="card" id="s15">
+    <h3><span class="num">15</span>2000年代の都市計画<span class="pg">pp.044–045</span></h3>
+    <ul>
+      <li>2001年小泉内閣の<b>都市再生</b>政策。都市再生本部を設置し、2002年<b>都市再生特別措置法</b>、<b>都市再生緊急整備地域</b>を創設。民間都市開発を誘導した。</li>
+      <li>2002年都市計画法改正で都市計画決定の特例・市町村の権限を拡大。</li>
+      <li><b>2004年景観法</b>（2005年全面施行）。2006年<b>住生活基本法</b>、2007年<b>住宅金融支援機構</b>、2008年<b>歴史まちづくり法</b>（地域における歴史的風致の維持及び向上に関する法律）。</li>
+      <li>2014年<b>空家等対策の推進に関する特別措置法</b>（2013年の空き家率13.5%が背景）。同年、都市再生特別措置法改正で<b>立地適正化計画</b>（コンパクトシティ＋ネットワーク）を創設し、<b>公共施設等総合管理計画</b>も制度化。</li>
+      <li>インフラ老朽化が問題化（2012年笹子トンネル天井板落下事故）。2011年東日本大震災、2016年熊本地震を経て、防災・減災が都市計画の中心課題に。</li>
+      <li>人口減少により、市街地に空隙が虫食い状に発生する<b>都市のスポンジ化</b>が課題となっている。</li>
+    </ul>
+    <div class="tip">2000年代の3大テーマ＝①都市再生 ②景観・歴史 ③縮退（空き家・立地適正化）。「拡大から縮小へ」の転換として整理する。</div>
+    
+<div class="houmon-note"><b style="color:var(--gold);letter-spacing:.1em">過去問の出題</b><ul><li><span class="y">exam_arch_20248</span><span class="t">選択</span><span class="q">歴史的まちなみ保全の年代順：古都保存法（1966）→伝統的建造物群保存地区（1975）→景観法（2004）→歴史まちづくり法（2008）</span><span class="a">→ 正解：ウ D→B→A→C</span></li><li><span class="y">exam_arch_20248</span><span class="t">小論文</span><span class="q">景観法（2004）制定当時のインタビュー記事を読んでの設問</span><span class="a">→ 景観法の核心＝地域住民の多様な主体の参画と合意形成を手続きとして法定</span></li></ul></div>
+</div>
+</section>
+
+<!-- ============ 第Ⅲ部 ============ -->
+<section class="part" id="p3">
+  <div class="part-head"><span class="no">PART Ⅲ</span><h2>建築基準法の基礎</h2><span class="sub">16–21 ／ 建築物の最低基準</span></div>
+  <p class="lead">建築基準法は「<b>建築物の安全・防火・衛生</b>」を守るための<b>最低基準</b>です。前半の<b>単体規定</b>（1棟ごとの安全）と、後半の<b>集団規定</b>（街並みとしての環境）を分けて理解することが最重要です。</p>
+
+  <div class="card" id="s16">
+    <h3><span class="num">16</span>建築基準法とは<span class="pg">pp.050–051</span></h3>
+    <ul>
+      <li>目的は<b>国民の生命・健康・財産の保護</b>と<b>建築物の安全性の確保</b>。1950年（昭和25年）制定、旧・市街地建築物法を廃止して全国統一の基準とした。</li>
+      <li><b>単体規定</b>（第2章）＝個々の建築物の安全・防火・衛生に関する規定。採光・換気・階段・耐火・構造耐力・避難など、<b>全国一律</b>に適用。</li>
+      <li><b>集団規定</b>（第3章）＝都市計画区域内等で、<b>用途地域ごとの用途制限、建ぺい率・容積率・高さ制限、日影規制、防火地域、地区計画</b>など、良好な市街地環境を守る規定。</li>
+      <li>章立て：第1章総則／第2章 建築物の敷地・構造・建築設備／第3章 都市計画区域等における建築物の敷地・構造・建築設備及び用途／第4章 建築協定／第5章 建築基準適合判定資格者検定／第6章 建築審査会／第7章 雑則／第8章 罰則。</li>
+      <li>「最低基準」であるため、地方公共団体の<b>条例による上乗せ規制</b>が可能。安全側に上乗せするのが原則。</li>
+    </ul>
+    <div class="tip">単体＝「その建物単体が安全か」、集団＝「周囲と合わせて街並みが良好か」。この区別がすべての出発点。</div>
+    
+  </div>
+
+  <div class="card" id="s17">
+    <h3><span class="num">17</span>道路（接道義務）<span class="pg">pp.052–053</span></h3>
+    <ul>
+      <li><b>接道義務</b>（法第43条第1項）：建築物の敷地は、<b>幅員4m以上の道路に2m以上接しなければならない</b>。目的は通行・消防・避難・採光・通風の確保。</li>
+      <li>建築基準法上の「道路」（法第42条）は、①<b>道路法による道路</b>（国道・県道・市町村道）②<b>都市計画法・土地区画整理法・都市再開発法等で築造された道路</b>③<b>既存道路</b>（1950年11月23日の法施行時から存在する幅員4m以上の道路）④<b>予定道路</b>（事業施行により築造される道路）⑤<b>特定行政庁が指定した私道</b>。</li>
+      <li><b>2項道路（みなし道路）</b>：幅員4m未満の既存道路で特定行政庁が指定したもの。建て替え時に<b>道路中心線から2m後退（セットバック）</b>し、その部分は敷地面積・建築面積に算入しない。</li>
+      <li>法第43条第2項：特定行政庁が交通・安全・防火・避難上支障がないと認めて許可した場合は、接道義務の例外となる。</li>
+    </ul>
+    <div class="tip">「4m・2m」は絶対暗記。2項道路は「4m未満でも建築できるが、建て替え時に2m後退」という例外中の例外。</div>
+    
+  </div>
+
+  <div class="card" id="s18">
+    <h3><span class="num">18</span>建ぺい率と容積率<span class="pg">pp.054–055</span></h3>
+    <ul>
+      <li><b>建ぺい率</b>＝建築面積÷敷地面積×100（%）。<b>容積率</b>＝延べ床面積÷敷地面積×100（%）。いずれも<b>用途地域ごとに都市計画で指定</b>される。</li>
+      <li>建ぺい率の緩和：<b>防火地域内の耐火建築物</b>、<b>準防火地域内の準耐火建築物</b>は+10%。<b>角地緩和</b>も+10%（特定行政庁の指定区域）。</li>
+      <li><b>前面道路幅員制限</b>：前面道路の幅員が12m未満の場合、容積率は「<b>前面道路幅員×法定乗数</b>」と指定容積率の<b>小さい方</b>になる。法定乗数は住居系<b>4/10</b>、その他<b>6/10</b>。</li>
+      <li><b>建築面積</b>＝外壁・柱の中心線で囲まれた水平投影面積。地階・屋根裏の扱いには算入規則がある。<b>延べ床面積</b>＝各階の床面積の合計（吹き抜け・バルコニー等に算入規則）。</li>
+      <li>2つの用途地域にまたがる敷地では、それぞれの指定値と面積割合による<b>按分（加重平均）</b>で求める。</li>
+      <li>2項道路のセットバック部分は、建築面積に含めない。</li>
+    </ul>
+    <div class="tip">容積率は「指定容積率」と「道路幅員×乗数」の<b>min</b>。計算問題はこの1点でほぼ解ける。住居系4/10・商業系6/10も必須。</div>
+    
+<div class="houmon-note"><b style="color:var(--gold);letter-spacing:.1em">過去問の出題</b><ul><li><span class="y">exam_arch_20218</span><span class="t">穴埋め</span><span class="q">建築面積率＝建ぺい率、延べ床面積率＝容積率。法定乗数で道路幅員制限も問われる</span><span class="a">→ 頻出計算問題。前面道路幅員×法定乗数（住居系4/10、その他6/10）</span></li></ul></div>
+</div>
+
+  <div class="card" id="s19">
+    <h3><span class="num">19</span>高さ制限<span class="pg">pp.056–057</span></h3>
+    <ul>
+      <li>高さ制限は5種類。①<b>絶対高さ制限</b>（第一種低層住居専用10m、第二種低層住居専用12m）②<b>道路斜線制限</b> ③<b>隣地斜線制限</b> ④<b>北側斜線制限</b> ⑤<b>日影規制</b>。</li>
+      <li><b>道路斜線制限</b>：前面道路の反対側の境界線から、住居系<b>1.25</b>／商業系<b>1.5</b>の勾配で引いた斜線以下に高さを抑える。</li>
+      <li><b>隣地斜線制限</b>：隣地境界線から<b>20m</b>（住居系）／<b>31m</b>（商業系）を超える部分について<b>1.25</b>勾配。</li>
+      <li><b>北側斜線制限</b>：第一種低層<b>5m</b>／第二種低層<b>10m</b>の高さから<b>1.25</b>勾配（中高層住居専用地域は10m）。</li>
+      <li><b>日影規制</b>：冬至日の真太陽時で、敷地境界線から<b>5m・10m</b>の線上の日影時間を地域ごとに制限（住居系1〜5時間）。対象区域・規制値は条例で指定。</li>
+      <li>2002年改正で斜線制限を緩和し<b>天空率</b>を導入。高さは都市計画の<b>高度地区</b>でも指定できる。</li>
+    </ul>
+    <div class="tip">「道路1.25/1.5」「隣地20m/31m」「北側5m/10m」の数値セットを、それぞれの目的（道路の採光・隣地の圧迫防止・北側の日照）と結びつける。</div>
+    
+<div class="houmon-note"><b style="color:var(--gold);letter-spacing:.1em">過去問の出題</b><ul><li><span class="y">H29-1</span><span class="t">選択</span><span class="q">高度地区と高さ制限の出題</span><span class="a">→ 高度地区は都市計画法第9条の地域地区の一種。絶対高さ制限＋斜線制限＋日影規制の組合せ</span></li></ul></div>
+</div>
+
+  <div class="card" id="s20">
+    <h3><span class="num">20</span>建築確認制度<span class="pg">pp.058–059</span></h3>
+    <ul>
+      <li><b>建築確認</b>：建築物を建築する場合、工事着手前に<b>建築主事</b>または<b>指定確認検査機関</b>の確認を受ける（法第6条）。</li>
+      <li>確認申請が必要な建築物：①<b>特殊建築物</b>（学校・病院・劇場・集会場・店舗・飲食店・旅館・共同住宅等）で床面積<b>200㎡超</b> ②<b>木造</b>で3階以上／延べ500㎡超／高さ13m超／軒高9m超 ③<b>木造以外</b>で2階以上／延べ200㎡超 ④条例で指定する区域内の建築物。防火・准防火地域外で階数2以下・延べ10㎡以内の増築等は不要。</li>
+      <li>流れ：確認申請→<b>確認済証</b>の交付→工事→<b>完了検査</b>（工事完了後7日以内）→<b>検査済証</b>。検査済証がないと登記・住宅ローン等で不利益を生じる。</li>
+      <li>2005年の<b>構造計算書偽造事件（姉歯事件）</b>を受け、2007年6月20日施行の改正で<b>建築基準適合判定資格者検定</b>と<b>構造計算適合性判定（ピアチェック）</b>を創設。一定規模以上は第三者が構造計算をチェックする。</li>
+    </ul>
+    <div class="tip">「確認済証（工事前）→検査済証（工事後）」の順序と、2007年のピアチェック導入をセットで覚える。</div>
+    
+  </div>
+
+  <div class="card" id="s21">
+    <h3><span class="num">21</span>建築基準法改正と倫理教育<span class="pg">pp.060–061</span></h3>
+    <ul>
+      <li>2005年、<b>姉歯秀次</b>による構造計算書偽造（<b>耐震偽装</b>）事件が発覚。建築士の倫理と資質が社会的に問われた。</li>
+      <li>2006年に<b>建築士法・建築基準法</b>を改正（重要事項説明の義務付け、構造計算適合性判定など）、2007年6月に施行。</li>
+      <li><b>専門職の3要件</b>＝①高度な倫理観と体系的専門知識・長期の訓練 ②組織化された専門職団体の構成員 ③<b>倫理綱領</b>による社会的信頼性の担保。</li>
+      <li>日本建築士会連合会「建築士倫理綱領」（2007）、日本建築学会「建築倫理綱領」（2009）。</li>
+      <li>技術者倫理教育では<b>JABEE</b>（日本技術者教育認定機構、1999設立）の認定プログラムが重視される。アカデミック・ハラスメント、利益相反、コンプライアンス、縦割り（タコツボ）批判も論点。</li>
+    </ul>
+    <div class="tip">姉歯事件は「制度（確認・審査）の穴」と「専門職倫理の崩壊」の両面から問われる。制度改正と倫理教育をセットで説明できるように。</div>
+    
+  </div>
+</section>
+
+<!-- ============ 第Ⅳ部 ============ -->
+<section class="part" id="p4">
+  <div class="part-head"><span class="no">PART Ⅳ</span><h2>都市計画法のしくみ</h2><span class="sub">22–30 ／ 土地利用規制と事業</span></div>
+  <p class="lead">都市計画法は、<b>「どこで・何を・どの程度まで」</b>建ててよいかを決める法律です。<b>マスタープラン（方針）→区域区分（線引き）→地域地区（用途地域）→開発許可</b>という4段階のフィルターで理解すると整理できます。</p>
+
+  <div class="card" id="s22">
+    <h3><span class="num">22</span>都市計画法の位置付け<span class="pg">pp.062–063</span></h3>
+    <ul>
+      <li>都市計画法は、<b>都市計画の内容・手続・制限・事業</b>を定める法律。1968年制定。</li>
+      <li>上位計画は<b>国土形成計画</b>（2005、旧・全国総合開発計画）と<b>国土利用計画</b>（1974）。都市計画法は国土利用計画の「都市地域」を受けて動く。</li>
+      <li>都市計画の対象は4つ：①<b>土地利用規制</b>（区域区分・地域地区）②<b>都市施設</b> ③<b>市街地開発事業</b> ④<b>地区計画</b>。</li>
+      <li>関連法は、首都圏整備法・近畿圏整備法・中部圏開発整備法、都市再生特別措置法、景観法、建築基準法、住宅地区改良法、土地区画整理法、都市再開発法、河川法、道路法、都市公園法、自然公園法、森林法、農業振興地域法など。</li>
+      <li>都市計画法は「基本法」ではなく、<b>個別法の調整役</b>として機能する。建築基準法とは「都市計画で用途地域を決め、建築基準法で建築物を規制する」という分担。</li>
+    </ul>
+    <div class="tip">「都市計画法＝土地利用の枠組み」「建築基準法＝建築物の規制」という役割分担が、第Ⅲ部と第Ⅳ部をつなぐ橋。</div>
+    
+<div class="houmon-note"><b style="color:var(--gold);letter-spacing:.1em">過去問の出題</b><ul><li><span class="y">exam_arch_20228</span><span class="t">選択</span><span class="q">国土利用計画法（1974）の出題</span><span class="a">→ 国土利用計画＝国土形成計画の下位計画。土地利用の基本方針を定める</span></li></ul></div>
+</div>
+
+  <div class="card" id="s23">
+    <h3><span class="num">23</span>都市計画法の体系<span class="pg">pp.064–065</span></h3>
+    <ul>
+      <li><b>都市計画区域</b>：都道府県が指定する、一体の都市として総合的に整備・開発・保全する必要がある区域。</li>
+      <li><b>準都市計画区域</b>：2000年改正で創設。都市計画区域外で土地利用規制が必要な区域。都市計画法・建築基準法を準用する。</li>
+      <li>法の体系は、①区域の指定 →②都市計画の決定（マスタープラン／土地利用規制＝区域区分・地域地区／都市施設／市街地開発事業／地区計画）→③<b>開発許可</b> →④<b>都市計画事業</b>。</li>
+      <li>決定権者は、広域的・根幹的計画が<b>都道府県</b>、身近な計画（用途地域・地区計画等）が<b>市町村</b>。2000年改正で市町村へ大幅に移譲された。</li>
+    </ul>
+    <div class="tip">「区域を決める→計画を決める→開発を許す→事業をやる」という4段階の流れ図を自分で描けるようにする。</div>
+    
+<div class="houmon-note"><b style="color:var(--gold);letter-spacing:.1em">過去問の出題</b><ul><li><span class="y">exam_arch_20218</span><span class="t">選択</span><span class="q">都市計画区域に関する出題</span><span class="a">→ 都市計画区域＝都市計画を定める区域。準都市計画区域＝一部の都市計画を適用する補完的区域</span></li></ul></div>
+</div>
+
+  <div class="card" id="s24">
+    <h3><span class="num">24</span>都市のマスタープラン<span class="pg">pp.066–067</span></h3>
+    <ul>
+      <li><b>区域マスタープラン</b>＝「都市計画区域の整備、開発及び保全の方針」（法第6条の2）。<b>都道府県</b>が、市町村の区域を超える広域的見地から定める。①都市計画の目標 ②区域区分の決定の有無・方針 ③土地利用・都市施設・市街地開発事業に関する主要な決定方針。</li>
+      <li><b>市町村マスタープラン</b>＝「市町村の都市計画に関する基本的な方針」（法第18条の2）。1992年改正で法定化。<b>区域マスタープランに即して</b>、住民意見を反映して定める。</li>
+      <li>両者は「<b>即す</b>」関係にあり、市町村マスタープランは個別の都市計画決定の指針となる。</li>
+      <li>策定にあたっては、公聴会の開催や素案の公表など、住民参加の手続が求められる。</li>
+    </ul>
+    <div class="tip">「区域マス＝都道府県・広域」「市町村マス＝市町村・身近」。「即す」は上位計画への適合を意味する法律用語。</div>
+    
+  </div>
+
+  <div class="card" id="s25">
+    <h3><span class="num">25</span>区域区分（線引き）<span class="pg">pp.068–069</span></h3>
+    <ul>
+      <li>1968年都市計画法で創設。高度経済成長下の人口集中・市街地の外延的拡大（<b>スプロール</b>）を防ぐため、都市計画区域を2つに区分する。決定権者は<b>都道府県</b>。</li>
+      <li><b>市街化区域</b>：すでに市街地を形成している区域＋おおむね<b>10年以内</b>に優先的・計画的に市街化を図るべき区域。必ず<b>用途地域</b>を指定する。</li>
+      <li><b>市街化調整区域</b>：市街化を<b>抑制</b>すべき区域。開発行為は原則不許可で、農地・緑地を保全する。</li>
+      <li><b>非線引き区域</b>：区域区分を定めない都市計画区域。必要に応じて用途地域を指定。2000年改正で<b>特定用途制限地域</b>を創設し、用途白地地域でも一定の規制が可能になった。</li>
+      <li>2000年改正では、三大都市圏以外でも線引きを選択できるようになった。</li>
+    </ul>
+    <div class="tip">線引き＝「市街化を進める区域」と「止める区域」の二分。開発許可とセットで、調整区域の原則不許可が制度の要。</div>
+    
+<div class="houmon-note"><b style="color:var(--gold);letter-spacing:.1em">過去問の出題</b><ul><li><span class="y">20258</span><span class="t">選択</span><span class="q">区域区分制度に関する記述として正しいものはどれか</span><span class="a">→ 正解：イ 「都市計画区域に区域区分を定めないこともある」→区域区分は1919年法ではなく1968年法で導入、13種類は用途地域</span></li><li><span class="y">exam_arch_20248</span><span class="t">選択</span><span class="q">都市計画提案制度に関する記述として誤りはどれか</span><span class="a">→ 正解：イ 「土地所有者全員の同意が必要」→2002年改正創設。NPO法人も提案可。都市計画審議会で審議されることもある</span></li></ul></div>
+</div>
+
+  <div class="card" id="s26">
+    <h3><span class="num">26</span>地域地区（用途地域等）<span class="pg">pp.070–071</span></h3>
+    <ul>
+      <li>地域地区は、用途・密度・高さ・形態・防火などを規制する<b>最も基本的な土地利用規制</b>（法第8条）。中心が<b>用途地域</b>。</li>
+      <li>用途地域は<b>13種類</b>。住居系8（第1種低層／第2種低層／第1種中高層／第2種中高層／第1種住居／第2種住居／準住居／田園住居）、商業系2（近隣商業／商業）、工業系3（準工業／工業／工業専用）。</li>
+      <li>用途地域を指定すると、<b>建築物の用途制限</b>と<b>建ぺい率・容積率</b>などのルールが決まる。</li>
+      <li>その他の地域地区：特別用途地区、特定用途制限地域、高度地区、高度利用地区、特定街区、都市再生特別地区、防火地域・準防火地域、景観地区、風致地区、駐車場整備地区、臨港地区、歴史的風土特別保存地区、緑地保全地域、特別緑地保全地区、生産緑地地区、伝統的建造物群保存地区、流通業務地区など。</li>
+    </ul>
+    <div class="scroll">
+    <table class="tbl">
+      <thead><tr><th>用途地域</th><th>建てられるものの目安</th></tr></thead>
+      <tbody>
+        <tr><td>第1種低層住居専用</td><td>低層住宅。小規模な店舗・事務所併設住宅、小中学校</td></tr>
+        <tr><td>第2種低層住居専用</td><td>低層住宅。小中学校、床面積150㎡までの一定の店舗</td></tr>
+        <tr><td>第1種中高層住居専用</td><td>中高層住宅。病院・大学、床面積500㎡までの一定の店舗</td></tr>
+        <tr><td>第2種中高層住居専用</td><td>中高層住宅。病院・大学、床面積1,500㎡までの店舗・事務所</td></tr>
+        <tr><td>第1種住居</td><td>住居の環境を守る地域。床面積3,000㎡までの店舗・事務所・ホテル</td></tr>
+        <tr><td>第2種住居</td><td>主に住居の環境を守る地域。店舗・事務所・ホテル・カラオケボックス</td></tr>
+        <tr><td>準住居</td><td>自動車関連施設と調和した住環境。客席200㎡未満の劇場など</td></tr>
+        <tr><td>田園住居</td><td>農業と調和した住環境。農業用施設・一定の店舗</td></tr>
+        <tr><td>近隣商業</td><td>日用品の買い物の場。住宅・店舗・小規模工場</td></tr>
+        <tr><td>商業</td><td>銀行・映画館・飲食店・百貨店。住宅・小規模工場</td></tr>
+        <tr><td>準工業</td><td>軽工業・サービス施設。環境悪化の大きい工場以外はほぼ可</td></tr>
+        <tr><td>工業</td><td>どんな工場も可。住宅・店舗は可、学校・病院・ホテルは不可</td></tr>
+        <tr><td>工業専用</td><td>工場のみ。住宅・店舗・学校・病院・ホテルは不可</td></tr>
+      </tbody>
+    </table>
+    </div>
+    <div class="tip">住居系の規制は「床面積の上限」で段階的に緩む（150→500→1,500→3,000㎡）。工業系は「学校・病院・ホテルが建てられるか」で区別する。</div>
+    
+<div class="houmon-note"><b style="color:var(--gold);letter-spacing:.1em">過去問の出題</b><ul><li><span class="y">exam_arch_20238</span><span class="t">選択</span><span class="q">現行都市計画法の地域地区に該当しないものはどれか</span><span class="a">→ 正解：ア 特定街区（特定街区は都市計画法第8条の地域地区ではなく、「都市計画施設の整備のための特別区域」）</span></li><li><span class="y">exam_arch_20218</span><span class="t">選択</span><span class="q">用途地域13種類の出題（住居系8・商業系2・工業系3）</span><span class="a">→ 頻出。低層住居専用・中高層住居専用・準住居・商業・工業専用は特に頻出</span></li></ul></div>
+</div>
+
+  <div class="card" id="s27">
+    <h3><span class="num">27</span>開発許可制度<span class="pg">pp.072–073</span></h3>
+    <ul>
+      <li>1968年創設。<b>開発行為</b>＝主として建築物の建築または特定工作物の建設の用に供する目的で行う<b>土地の区画形質の変更</b>。</li>
+      <li>許可権者は<b>都道府県知事</b>。規模要件は、市街化区域＝原則<b>1,000㎡以上</b>（三大都市圏の既成市街地・近郊整備地帯等は500㎡以上、条例で300㎡まで引下げ可）、市街化調整区域＝<b>規模を問わず必要</b>、非線引き区域・準都市計画区域＝<b>3,000㎡以上</b>（条例で300㎡まで引下げ可）、都市計画区域外・準都市計画区域外＝<b>1ha以上</b>。</li>
+      <li>許可基準は2つ。①<b>技術基準</b>（道路・公園・給排水施設の整備、防災）＝全市街地に適用、条例で強化・緩和可。②<b>立地基準</b>＝<b>市街化調整区域のみ</b>適用。原則不許可だが、公益上必要な施設、農林漁業用、地域住民の日常生活に必要な店舗等、市街化区域内に立地困難な工場等は例外。</li>
+      <li>許可不要：農林漁業用建築物、駅舎・図書館・公民館・変電所等の公益上必要な建築物（政令）、都市計画事業として行う開発行為。ただし社会福祉施設・医療施設・学校施設、庁舎・宿舎は許可が必要。</li>
+      <li>市街化調整区域では、開発行為を伴わない<b>建築行為</b>（新築・用途変更）も許可が必要。</li>
+    </ul>
+    <div class="tip">規模要件は区域ごとに異なる。「調整区域は規模を問わず」「区域外は1ha」の2つが特に問われやすい。</div>
+    
+  </div>
+
+  <div class="card" id="s28">
+    <h3><span class="num">28</span>都市計画事業<span class="pg">pp.074–075</span></h3>
+    <ul>
+      <li><b>都市計画事業</b>＝都市計画で定めた<b>都市施設</b>・<b>市街地開発事業</b>を実施する事業。認可・執行の手続が定められている。</li>
+      <li><b>都市施設</b>（法第11条）は11種類：道路・都市高速鉄道・駐車場／公園・緑地・広場・墓園／水道・下水道・ポンプ場・汚水処理場／河川・運河／学校・図書館・公民館／病院・保育所／市場・と畜場・火葬場／一団地の住宅施設／一団地の官公庁施設／流通業務団地／一団地の福祉施設。</li>
+      <li><b>市街地開発事業</b>：土地区画整理事業、新住宅市街地開発事業、市街地再開発事業、工業団地造成事業、新都市基盤整備事業、住宅街区整備事業。</li>
+      <li><b>土地区画整理事業</b>は<b>換地</b>・<b>減歩</b>・<b>保留地</b>によって、公共施設の整備改善と宅地の利用増進を図る。</li>
+      <li><b>市街地再開発事業</b>は低未利用地の高度利用と都市機能の更新を図る。第一種（<b>権利変換方式</b>）と第二種（<b>管理処分方式</b>）がある。</li>
+    </ul>
+    <div class="tip">区画整理＝「換地で土地を交換」、再開発＝「権利変換で床を交換」。手法の違いを一言で説明できるように。</div>
+    
+  </div>
+
+  <div class="card" id="s29">
+    <h3><span class="num">29</span>地区計画<span class="pg">pp.076–077</span></h3>
+    <ul>
+      <li><b>1980年都市計画法改正</b>で創設（1981年施行）。身近な地区単位で、地区施設の配置と建築物の用途・建ぺい率・容積率・高さ・壁面位置などを<b>きめ細かく</b>定める。神戸市まちづくり条例がモデル。</li>
+      <li>内容は、①地区計画の目標 ②土地利用の方針 ③地区施設の整備の方針 ④建築物等の整備の方針。<b>地区整備計画</b>で具体的な規制を定める。</li>
+      <li><b>市町村</b>が決定する。地区計画区域内の建築行為は<b>市町村長への届出</b>が必要。地区整備計画区域内では、条例で建築基準法を<b>上乗せ・緩和</b>できる（地区計画等の条例）。</li>
+      <li>1992年改正で用途地域内でも地区計画が可能になり、2000年改正で「地区計画等」として拡充された。</li>
+      <li>事例：鎌倉市（歴史的景観の保全）、世田谷区など。住民発意のまちづくりと相性がよい。</li>
+    </ul>
+    <div class="tip">地区計画は「全国一律の規制」への反省から生まれた<b>地域発の規制</b>。市町村決定・届出制・条例による上乗せが3つの特徴。</div>
+    
+<div class="houmon-note"><b style="color:var(--gold);letter-spacing:.1em">過去問の出題</b><ul><li><span class="y">20258</span><span class="t">選択</span><span class="q">地区計画の出題（市町村が定める、所有者全員の合意は不要）</span><span class="a">→ 地区計画では建物に対する規制を強化することも緩和することもできる</span></li></ul></div>
+</div>
+
+  <div class="card" id="s30">
+    <h3><span class="num">30</span>都市計画決定のしくみ<span class="pg">pp.078–079</span></h3>
+    <ul>
+      <li>都市計画は市民の権利・義務に直接影響するため、<b>法定の手続</b>を経て決定する。決定権者は、広域的・根幹的計画＝<b>都道府県</b>、身近な計画＝<b>市町村</b>。</li>
+      <li>手続の流れ：<b>案の作成 → 公告・縦覧（2週間）→ 公聴会・説明会 → 意見書 → 都市計画審議会 → 決定 → 告示・縦覧</b>。</li>
+      <li><b>都市計画審議会</b>は、学識経験者・議会議員・関係行政機関の職員・住民代表等で構成（都道府県9人以上、市町村5人以上）。諮問・審議のほか、関係行政機関への意見申出ができる。原則公開だが、<b>形骸化</b>の指摘もある。</li>
+      <li>大規模な都市施設・市街地開発事業では、<b>環境アセスメント</b>（環境影響評価）を実施する。</li>
+      <li><b>2002年改正で都市計画提案制度</b>を創設。土地所有者・まちづくり協議会・まちづくりNPO等が、一定規模以上・<b>土地所有者の3分の2以上の同意</b>などの条件を満たせば、都市計画を提案できる。住民が受け身から主体へ転換する契機となった。</li>
+    </ul>
+    <div class="tip">「公告・縦覧2週間」「審議会」「提案制度（2/3同意）」の3点セット。住民参加の制度設計として問われる。</div>
+    
+  </div>
+</section>
+
+<!-- ============ 第Ⅴ部 ============ -->
+<section class="part" id="p5">
+  <div class="part-head"><span class="no">PART Ⅴ</span><h2>世界の制度と現代の課題</h2><span class="sub">31–40 ／ 比較とこれから</span></div>
+  <p class="lead">英米独仏の制度は「<b>誰が計画を決め、何で開発をコントロールするか</b>」で比較すると覚えられます。後半は、拡大から縮小・協働へという21世紀の潮流です。</p>
+
+  <div class="card" id="s31">
+    <h3><span class="num">31</span>アメリカ<span class="pg">pp.080–081</span></h3>
+    <ul>
+      <li>連邦に都市計画省はなく、<b>州・地方自治体が主体</b>。州の<b>enabling act</b>（授権法）に基づき、自治体がゾーニングなどを制定する。</li>
+      <li>自治体の手法：<b>マスタープラン</b>（総合計画）、<b>ゾーニング</b>（用途地域制）、<b>宅地分割規制</b>（subdivision）、インセンティブ・ゾーニング、<b>PUD</b>（計画単位開発）、<b>TDR</b>（開発権移転）、デザイン審査。</li>
+      <li>1916年<b>ニューヨーク市ゾーニング条例</b>が最初。1926年の<b>ユークリッド判決</b>でゾーニングが合憲とされた。</li>
+      <li><b>広域成長管理</b>：ハワイ・バーモント・フロリダ・オレゴン（1960–70年代）、ニュージャージー・メイン・ロードアイランド・ジョージア（1980年代）、ワシントン・メリーランド（1990年代初頭）。</li>
+      <li>1990年代以降は<b>スマートグロース</b>。2000年代はメガリージョン（America 2050）。人口減少都市（デトロイト、フィラデルフィア、クリーブランド、ピッツバーグ、フリント）のプランニングも注目される。</li>
+    </ul>
+    <div class="tip">アメリカ＝「ゾーニングの国」。日本の用途地域はアメリカのゾーニングを参考にしたが、日本は国が枠を決め、アメリカは自治体が決める点が異なる。</div>
+    
+<div class="houmon-note"><b style="color:var(--gold);letter-spacing:.1em">過去問の出題</b><ul><li><span class="y">2019</span><span class="t">選択</span><span class="q">ゾーニング（アメリカ型区域規制）とユークリッド判決</span><span class="a">→ 頻出。1922年ユークリッド判決（USSC）がゾーニングの合法性を確立した</span></li></ul></div>
+</div>
+
+  <div class="card" id="s32">
+    <h3><span class="num">32</span>イギリス<span class="pg">pp.082–083</span></h3>
+    <ul>
+      <li>制度の二本柱は<b>開発計画（Development Plan）</b>と<b>計画許可（Planning Permission）</b>。</li>
+      <li><b>1947年都市農村計画法</b>で開発権を公有化し、開発計画と開発許可の体系を確立した。</li>
+      <li>2004年<b>計画・強制購入法</b>で<b>LDF</b>（Local Development Framework）へ。2011年<b>地方主義法</b>で<b>NPPF</b>（National Planning Policy Framework）と<b>近隣計画</b>（Neighbourhood Plan）を導入。</li>
+      <li>計画許可は、開発行為に原則必要。地方計画当局（LPA）が開発計画に照らして判断し、不許可には不服申立て（appeal）ができる。</li>
+      <li>日本の開発許可との違いは、①<b>建築行為も含む</b> ②計画に法的拘束力はないが許可判断の基準になる ③許可に期限・条件が付く、の3点。</li>
+    </ul>
+    <div class="tip">イギリス＝「計画許可の国」。1947年に開発権を公有化した点が、日本・アメリカとの決定的な違い。</div>
+    
+  </div>
+
+  <div class="card" id="s33">
+    <h3><span class="num">33</span>ドイツ<span class="pg">pp.084–085</span></h3>
+    <ul>
+      <li>連邦制で<b>国・州・市町村の3層</b>。郡と、郡に属さない市町村がある。</li>
+      <li><b>建設法典（Baugesetzbuch, BauGB）</b>が都市計画の基本法で、全国一律に適用。広域計画は国土計画・州計画（州計画は1/5万〜1/10万）。</li>
+      <li><b>F-Plan</b>（Flächennutzungsplan／<b>土地利用計画</b>）：基礎自治体全域を対象に、住宅・混合・産業地域等のゾーニングと市街地を指定。1/5,000。議会議決＋上級行政庁の認可が必要。行政内部の拘束力をもつ。</li>
+      <li><b>B-Plan</b>（Bebauungsplan／<b>地区詳細計画</b>）：一般住宅地区・特別地区・工業地区等の詳細な用途、建ぺい率・容積率・建築線・道路位置を定める。1/1,000。議会審議を経て、<b>私人に対する法的拘束力</b>をもつ。</li>
+      <li><b>対流原則（Gegenstromprinzip）</b>：下位計画は上位計画に調整しなければならない。</li>
+      <li>建築許可は、①全面B-Plan区域＝B-Plan適合 ②都市計画区域（既成市街地等）＝周辺との調和 ③外部区域＝原則不許可、の3類型。</li>
+    </ul>
+    <div class="tip">F-Plan＝「行政内部の土地利用の枠」、B-Plan＝「私人を拘束する詳細規制」。この2階建て構造がドイツの核心。</div>
+    
+  </div>
+
+  <div class="card" id="s34">
+    <h3><span class="num">34</span>フランス<span class="pg">pp.086–087</span></h3>
+    <ul>
+      <li>地方制度は<b>州（région）・県（département）・市町村（commune）</b>。市町村は約<b>36,700</b>と小規模多数。</li>
+      <li>都市計画は<b>SCOT</b>（都市圏整合計画＝広域）と<b>PLU</b>（地方都市計画＝市町村）の2層。</li>
+      <li><b>1983年地方分権法</b>で国の計画許可権限を市町村へ移譲。<b>2000年SRU法</b>（都市連帯再生法）でPOSを廃止してPLUへ再編し、都市再生・社会的混住・持続可能な開発を掲げた。</li>
+      <li>PLUはゾーニング（UA都市域、AU開発予定地、A農業地域、N自然地域）と建築規制を定める。</li>
+      <li>2010年<b>グルネル法</b>（環境）、2014年<b>ALUR法</b>（住宅・都市計画の近代化）で制度を更新。</li>
+    </ul>
+    <div class="tip">フランス＝「SCOT（広域）＋PLU（市町村）」の2層。イギリスの「計画許可」に対し、フランスは<b>ゾーニング型</b>に近い。</div>
+    
+  </div>
+
+  <div class="card" id="s35">
+    <h3><span class="num">35</span>都市のサステイナビリティ<span class="pg">pp.088–089</span></h3>
+    <ul>
+      <li><b>持続可能な開発</b>は1980年代に登場。<b>1987年ブルントラント報告</b>（Our Common Future）、<b>1992年リオ地球サミット</b>（アジェンダ21）が転換点。</li>
+      <li>都市は環境負荷の主要原因であり、地球温暖化・資源・エネルギーの枯渇・生物多様性の損失が課題。</li>
+      <li><b>イアン・マクハーグ</b>『Design with Nature』1969。オーバーレイによる<b>土地利用の適性評価</b>で、GISの先駆けとなった。</li>
+      <li><b>サステイナブル・コミュニティ</b>、<b>スマートグロース</b>、エコシティ・環境共生都市といった概念へ展開。</li>
+    </ul>
+    <div class="tip">「環境を設計条件にする」という発想の転換がマクハーグの功績。オーバーレイ＝透明図面の重ね合わせ。</div>
+    
+  </div>
+
+  <div class="card" id="s36">
+    <h3><span class="num">36</span>ニューアーバニズム<span class="pg">pp.090–091</span></h3>
+    <ul>
+      <li>1980年代、アメリカの郊外スプロールと中心市街地の衰退への反省から、伝統的な街並み・コミュニティを再評価する運動が生まれた。</li>
+      <li>1991年<b>アハーン原則</b>（6原則）、1993年第1回<b>CNU</b>会議、1996年<b>ニューアーバニズム憲章</b>。</li>
+      <li>憲章は<b>地域（metropolis／city／town）・地区（neighborhood／district／corridor）・街区・建築物</b>の3段階で構成。コンパクト・混合利用・歩行者優先・公共交通優先・公共空間中心を掲げる。</li>
+      <li><b>TND</b>（Traditional Neighborhood Development）：伝統的街区型開発。<b>アンドレス・デュアニー</b>と<b>エリザベス・プラッター＝ザイベック</b>によるフロリダ州<b>シーサイド</b>（1981）が代表。</li>
+      <li><b>TOD</b>（Transit-Oriented Development）：<b>ピーター・カルソープ</b>が提唱。駅を中心に徒歩圏（約400m）へ職住近接・混合利用を集める。</li>
+    </ul>
+    <div class="tip">TND＝「街区のつくり方」、TOD＝「駅を中心にした配置」。どちらもスマートグロースの実現手法として位置づく。</div>
+    
+<div class="houmon-note"><b style="color:var(--gold);letter-spacing:.1em">過去問の出題</b><ul><li><span class="y">exam_arch_20248</span><span class="t">選択</span><span class="q">TOD（駅中心の開発方式）に関する記述</span><span class="a">→ 正解例：TOD＝Transit Oriented Development。駅を中心に商業・居住・公共施設を配置</span></li></ul></div>
+</div>
+
+  <div class="card" id="s37">
+    <h3><span class="num">37</span>コンパクトシティ<span class="pg">pp.092–093</span></h3>
+    <ul>
+      <li>市街地をコンパクトにまとめ、農地・自然を保全し、自動車依存を減らして、公共交通・徒歩で暮らせる都市をめざす考え方。</li>
+      <li>中心市街地の活性化と、行政・インフラの維持コストの効率化という2つの目的をもつ。</li>
+      <li>欧州では1990年<b>EUグリーンペーパー</b>（都市環境）やイギリスの<b>アーバンビレッジ</b>が代表的。背景には<b>ローマクラブ『成長の限界』</b>（1972）や<b>ストックホルム人間環境会議</b>（1972）がある。</li>
+      <li>日本では<b>集約型都市構造</b>と呼び、2014年の都市再生特別措置法改正で<b>立地適正化計画</b>（<b>居住誘導区域</b>・<b>都市機能誘導区域</b>）を制度化した。</li>
+      <li>関連概念として<b>新アテネ憲章</b>（1998採択・2003）がある。機能主義を批判的に継承し、環境・都市再生・歴史的遺産・生活の質・参加と協働を掲げる。</li>
+    </ul>
+    <div class="tip">コンパクトシティ＝「拡大」から「集約」への転換。日本では立地適正化計画がその制度的表現。</div>
+    
+<div class="houmon-note"><b style="color:var(--gold);letter-spacing:.1em">過去問の出題</b><ul><li><span class="y">2019</span><span class="t">小論文</span><span class="q">立地適正化計画（都市再生特別措置法に基づく）の出題</span><span class="a">→ 2014年創設。居住機能や公共施設を誘導区域に集約する計画。コンパクトシティ実現の主要ツール</span></li></ul></div>
+</div>
+
+  <div class="card" id="s38">
+    <h3><span class="num">38</span>シティリジェネレーション／定住自立圏<span class="pg">pp.094–095</span></h3>
+    <ul>
+      <li><b>シティリジェネレーション</b>＝都市再生。1970年代以降の欧米の都市衰退への対応で、イギリスの<b>都市開発公社（UDC）</b>や<b>シティ・チャレンジ</b>が代表。</li>
+      <li>日本では2001年の都市再生本部、2002年<b>都市再生特別措置法</b>、<b>都市再生緊急整備地域</b>が中心。</li>
+      <li><b>定住自立圏</b>：2008年国土形成計画で提唱、2009年「定住自立圏構想」推進要領。<b>中心市</b>（都市機能）と<b>周辺市町村</b>（農林漁業等）が連携し、生活機能を確保する。</li>
+      <li>コンパクトシティ＋ネットワークの地方版として、広域連携・連携中枢都市圏へ展開。</li>
+    </ul>
+    <div class="tip">「都市再生」は大都市の再生、「定住自立圏」は地方の生活機能確保。規模と目的が異なる。</div>
+    
+<div class="houmon-note"><b style="color:var(--gold);letter-spacing:.1em">過去問の出題</b><ul><li><span class="y">exam_arch_20248</span><span class="t">小論文</span><span class="q">都市再生（シティリジェネレーション）とまちづくりの潮流に関する出題</span><span class="a">→ 小論文：戦後80年を振り返り、1945–1960／1960–1980／1980–2000／2000–2020／2020–2025の各時代から2つ選んで論じる</span></li></ul></div>
+</div>
+
+  <div class="card" id="s39">
+    <h3><span class="num">39</span>新しい公共とガバナンス<span class="pg">pp.096–097</span></h3>
+    <ul>
+      <li><b>「新しい公共」</b>：2010年の「新しい公共」円卓会議を契機に、公共を行政の独占から、市民・NPO・企業等の<b>協働</b>へと開く考え方。</li>
+      <li><b>ガバナンス</b>＝統治。政府だけでなく、市場・市民・NPO等の多様な主体による<b>ネットワーク型の統治</b>を指す。</li>
+      <li><b>補完性の原則</b>（subsidiarity）：住民に身近な主体が優先し、国は補完的に担う。</li>
+      <li>まちづくりの主体は「住民参加」→「市民主体」→「<b>協働型</b>」へと移行。三鷹市のコミュニティ・ガバナンスなどが事例。</li>
+    </ul>
+    <div class="tip">ガバナンスは「government（政府）」との対比で理解する。統治の主体が多元化することがポイント。</div>
+    
+<div class="houmon-note"><b style="color:var(--gold);letter-spacing:.1em">過去問の出題</b><ul><li><span class="y">exam_arch_20248</span><span class="t">小論文</span><span class="q">景観法制定プロセスと「それぞれの地域で美しさを決める」方式の現代的課題</span><span class="a">→ 景観法の核心＝多様な主体の参画による合意形成が手続きとして法定。補完性の原則</span></li></ul></div>
+</div>
+
+  <div class="card" id="s40">
+    <h3><span class="num">40</span>条例によるまちづくり<span class="pg">pp.098–099</span></h3>
+    <ul>
+      <li><b>条例</b>は地方自治体の自治立法。国の法令の範囲内で、地域の実情に応じて制定する。2000年<b>地方分権一括法</b>で条例制定権が拡大した。</li>
+      <li><b>まちづくり条例</b>の類型：①<b>基本条例</b>（理念・手続）②<b>実体的条例</b>（土地利用・建築規制の上乗せ）③<b>手続条例</b>（計画決定・事業の手続）④<b>地区計画等の条例</b>⑤<b>協定</b>。</li>
+      <li>代表例は<b>神戸市まちづくり条例</b>（1981）。世田谷区・鎌倉市なども住民発意のまちづくりを条例で支えてきた。</li>
+      <li>条例による<b>上乗せ・横出し規制</b>や、地区計画等の条例による建築基準法の補完が、地域独自の景観・環境を守る手段となる。</li>
+    </ul>
+    <div class="tip">条例は「国の基準より厳しくできる」ことが最大の武器。景観・環境・歴史的景観の保全で威力を発揮する。</div>
+    
+<div class="houmon-note"><b style="color:var(--gold);letter-spacing:.1em">過去問の出題</b><ul><li><span class="y">exam_arch_20238</span><span class="t">選択</span><span class="q">PFI（Private Finance Initiative）とまちづくり条例の出題</span><span class="a">→ PFI＝民間資金で公共施設を建設・運営。まちづくり条例＝神戸市1981年が先駆け</span></li></ul></div>
+</div>
+</section>
+
+<!-- ============ 年表 ============ -->
+<section class="part" id="chrono">
+  <div class="part-head"><span class="no">CHRONOLOGY</span><h2>都市計画 年表</h2><span class="sub">1868–2016 ／ 日本の法制度を中心に</span></div>
+  <p class="lead">年号は「法令名とセット」で覚える。特に<b>1919・1968・1980・2000</b>の4つは、それぞれ制度の性格が変わる転換点です。</p>
+  <div class="scroll">
+  <table class="tbl">
+    <thead><tr><th>年</th><th>事項</th><th>年</th><th>事項</th></tr></thead>
+    <tbody>
+      <tr><td class="c">1868</td><td>江戸を東京と改称</td><td class="c">1963</td><td>近畿圏整備法／新住宅市街地開発法</td></tr>
+      <tr><td class="c">1872</td><td>銀座・築地の大火／銀座煉瓦街</td><td class="c">1968</td><td><b>都市計画法（新法）</b></td></tr>
+      <tr><td class="c">1888</td><td><b>東京市区改正条例</b></td><td class="c">1969</td><td>都市再開発法／新全総</td></tr>
+      <tr><td class="c">1889</td><td>市制・町村制／東京市制</td><td class="c">1970</td><td>建築基準法改正（容積率の全国導入）</td></tr>
+      <tr><td class="c">1898</td><td>大阪市第1回市区改正</td><td class="c">1972</td><td>都市計画法改正／日本列島改造論</td></tr>
+      <tr><td class="c">1903</td><td>レッチワース（英国初の田園都市）</td><td class="c">1974</td><td>国土利用計画法</td></tr>
+      <tr><td class="c">1919</td><td><b>都市計画法・市街地建築物法</b></td><td class="c">1977</td><td>三全総（定住構想）</td></tr>
+      <tr><td class="c">1923</td><td>関東大震災／帝都復興院／同潤会</td><td class="c">1980</td><td><b>都市計画法改正（地区計画制度）</b></td></tr>
+      <tr><td class="c">1924</td><td>帝都復興計画／アムステルダム国際都市計画会議</td><td class="c">1981</td><td>神戸市まちづくり条例</td></tr>
+      <tr><td class="c">1926</td><td>ユークリッド判決（米・ゾーニング合憲）</td><td class="c">1987</td><td>四全総（交流ネットワーク構想）／ブルントラント報告</td></tr>
+      <tr><td class="c">1928</td><td>ラドバーン（歩車分離）</td><td class="c">1992</td><td>都市計画法改正（市町村マスタープラン）／リオ地球サミット</td></tr>
+      <tr><td class="c">1933</td><td>CIAM第4回アテネ会議／アテネ憲章</td><td class="c">1995</td><td>阪神・淡路大震災</td></tr>
+      <tr><td class="c">1937</td><td>防空法</td><td class="c">1998</td><td>中心市街地活性化法／大規模小売店舗立地法／NPO法</td></tr>
+      <tr><td class="c">1939</td><td>東京緑地計画</td><td class="c">1999</td><td>地方分権一括法／建築基準法の性能規定化</td></tr>
+      <tr><td class="c">1940</td><td>都市計画法改正（緑地を都市計画施設に）</td><td class="c">2000</td><td><b>都市計画法改正（地方分権・準都市計画区域）</b></td></tr>
+      <tr><td class="c">1944</td><td>大ロンドン計画</td><td class="c">2002</td><td>都市再生特別措置法／都市計画提案制度</td></tr>
+      <tr><td class="c">1946</td><td>戦災復興院／ニュータウン法（英）</td><td class="c">2004</td><td>景観法／UR都市再生機構</td></tr>
+      <tr><td class="c">1947</td><td>都市農村計画法（英・開発権の公有化）</td><td class="c">2005</td><td>景観法全面施行／国土形成計画法／姉歯事件</td></tr>
+      <tr><td class="c">1950</td><td><b>建築基準法</b>／文化財保護法／住宅金融公庫／公営住宅法</td><td class="c">2006</td><td>住生活基本法／まちづくり三法改正／建築基準法改正</td></tr>
+      <tr><td class="c">1955</td><td>日本住宅公団</td><td class="c">2007</td><td>住宅金融支援機構／建築士法改正</td></tr>
+      <tr><td class="c">1956</td><td>首都圏整備法</td><td class="c">2008</td><td>歴史まちづくり法／定住自立圏構想</td></tr>
+      <tr><td class="c">1961</td><td>千里ニュータウン</td><td class="c">2011</td><td>東日本大震災／地方主義法（英）</td></tr>
+      <tr><td class="c">1962</td><td>全総（拠点開発構想）</td><td class="c">2014</td><td>空家等対策特別措置法／立地適正化計画／公共施設等総合管理計画</td></tr>
+    </tbody>
+  </table>
+  </div>
+  <p class="note">※ 太字は第1章で特に重視される転換点。年表は教科書 pp.046–049 の資料に基づく。</p>
+</section>
+
+<!-- ============ 人物 ============ -->
+<section class="part" id="people">
+  <div class="part-head"><span class="no">PEOPLE</span><h2>人物・著書・キーワード</h2><span class="sub">01–09 ／ 思想史の必須人物</span></div>
+  <div class="scroll">
+  <table class="tbl">
+    <thead><tr><th>人物</th><th>生没年</th><th>著書・業績</th><th>キーワード</th></tr></thead>
+    <tbody>
+      <tr><td>ロバート・オーウェン</td><td class="c">1771–1858</td><td>ニューラナークの実験</td><td>理想工業村／パターナリズム／協同組合</td></tr>
+      <tr><td>エベネザー・ハワード</td><td class="c">1850–1928</td><td>『明日の田園都市』1898</td><td>田園都市／人口3万2,000人／緑地帯</td></tr>
+      <tr><td>レイモンド・アンウィン</td><td class="c">1863–1940</td><td>『Town Planning in Practice』1909／レッチワース／ハムステッド</td><td>田園郊外／近隣住区の源流</td></tr>
+      <tr><td>クラレンス・ペリー</td><td class="c">1872–1944</td><td>近隣住区論（1924）</td><td>小学校区／徒歩圏／通過交通の排除</td></tr>
+      <tr><td>クラレンス・スタイン／ヘンリー・ライト</td><td class="c">—</td><td>ラドバーン（1928）</td><td>スーパーブロック／クルドサック／歩車分離</td></tr>
+      <tr><td>パトリック・ゲデス</td><td class="c">1854–1932</td><td>『Cities in Evolution』1915</td><td>都市は有機体／バレー・セクション／地域調査</td></tr>
+      <tr><td>ルイス・マンフォード</td><td class="c">1895–1990</td><td>『都市の文化』1938／『都市の歴史』1961</td><td>自動車都市批判／都市文明論</td></tr>
+      <tr><td>フランク・ロイド・ライト</td><td class="c">1867–1959</td><td>『Disappearing City』1932</td><td>ブロードエーカー・シティ／低密度分散</td></tr>
+      <tr><td>ル・コルビュジエ</td><td class="c">1887–1965</td><td>「300万人の現代都市」1922／『輝く都市』1935</td><td>超高層／機能主義／アテネ憲章（1933）</td></tr>
+      <tr><td>ジェイン・ジェイコブス</td><td class="c">1916–2006</td><td>『アメリカ大都市の死と生』1961</td><td>多様性の4条件／近代都市計画批判</td></tr>
+      <tr><td>クリストファー・アレクサンダー</td><td class="c">1936–2022</td><td>「都市はツリーではない」1965／『パタン・ランゲージ』1977</td><td>セミラティス／生成のプロセス</td></tr>
+      <tr><td>イアン・マクハーグ</td><td class="c">1920–2001</td><td>『Design with Nature』1969</td><td>オーバーレイ／土地利用適性評価</td></tr>
+      <tr><td>ピーター・カルソープ</td><td class="c">1949–</td><td>TODの提唱</td><td>公共交通指向型開発／スマートグロース</td></tr>
+      <tr><td>デュアニー＆プラッター＝ザイベック</td><td class="c">—</td><td>シーサイド（1981）</td><td>TND／ニューアーバニズム</td></tr>
+      <tr><td>後藤新平</td><td class="c">1857–1929</td><td>帝都復興院総裁</td><td>震災復興／区画整理</td></tr>
+      <tr><td>ジョルジュ・オスマン</td><td class="c">1809–1891</td><td>パリ改造（19世紀後半）</td><td>直線・放射状街路／上下水道／公園</td></tr>
+    </tbody>
+  </table>
+  </div>
+</section>
+
+<!-- ============ 制度比較 ============ -->
+<section class="part" id="compare">
+  <div class="part-head"><span class="no">COMPARISON</span><h2>日・米・英・独・仏 制度比較</h2><span class="sub">31–34 ／ 横断整理</span></div>
+  <div class="scroll">
+  <table class="tbl">
+    <thead><tr><th></th><th>日本</th><th>アメリカ</th><th>イギリス</th><th>ドイツ</th><th>フランス</th></tr></thead>
+    <tbody>
+      <tr><th>計画の体系</th><td>都市計画（区域マス＋市町村マス／区域区分／地域地区）</td><td>マスタープラン＋ゾーニング</td><td>開発計画（LDF／NPPF）</td><td>F-Plan（土地利用計画）＋B-Plan（地区詳細計画）</td><td>SCOT（広域）＋PLU（市町村）</td></tr>
+      <tr><th>開発の規制</th><td>開発許可＋建築確認</td><td>ゾーニング＋宅地分割規制</td><td><b>計画許可</b>（建築行為も含む）</td><td><b>建築許可</b>（B-Plan適合）</td><td>PLU適合＋建築許可</td></tr>
+      <tr><th>決定主体</th><td>都道府県／市町村</td><td>自治体（州の授権法に基づく）</td><td>地方計画当局（LPA）</td><td>市町村（上級行政庁の認可）</td><td>市町村（国が関与）</td></tr>
+      <tr><th>法的拘束力</th><td>都市計画決定に拘束力</td><td>ゾーニングに拘束力</td><td>開発計画は許可判断の基準（直接の拘束力なし）</td><td>B-Planが私人を拘束</td><td>PLUが私人を拘束</td></tr>
+      <tr><th>特徴</th><td>全国一律＋地域特性の二段構え</td><td>自治体主権・柔軟な手法（PUD・TDR）</td><td>開発権の公有化（1947）</td><td>2階建て構造・対流原則</td><td>広域調整＋小規模市町村の組合せ</td></tr>
+    </tbody>
+  </table>
+  </div>
+  <div class="tip" style="margin-top:16px">比較の軸は「<b>計画に拘束力があるか</b>」「<b>建築行為まで規制するか</b>」「<b>誰が決めるか</b>」の3つ。この3軸で5か国を説明できれば十分。</div>
+</section>
+
+<!-- ============ 用語集 ============ -->
+<section class="part" id="glossary">
+  <div class="part-head"><span class="no">GLOSSARY</span><h2>日英対訳 用語集</h2><span class="sub">専門用語の確認</span></div>
+  <div class="scroll">
+  <table class="tbl">
+    <thead><tr><th>日本語</th><th>英語</th><th>ひとこと定義</th></tr></thead>
+    <tbody>
+      <tr><td>都市計画</td><td>city planning / urban planning</td><td>都市の将来像と土地利用・施設・事業を総合的に定めること</td></tr>
+      <tr><td>まちづくり</td><td>machizukuri / community development</td><td>住民・事業者・行政の協働による継続的な環境改善</td></tr>
+      <tr><td>田園都市</td><td>garden city</td><td>都市と田園の利点を併せもち、人口と拡大を計画的に制限した都市</td></tr>
+      <tr><td>近隣住区</td><td>neighborhood unit</td><td>小学校区を単位に公共施設と歩行圏を構成する住区計画</td></tr>
+      <tr><td>スーパーブロック</td><td>superblock</td><td>幹線道路に囲まれた大きな街区。内部に歩行者専用路を配置</td></tr>
+      <tr><td>クルドサック</td><td>cul-de-sac</td><td>袋小路。通過交通を排除し、住環境を守る</td></tr>
+      <tr><td>歩車分離</td><td>separation of pedestrian and vehicular traffic</td><td>歩行者と自動車の動線を立体・平面で分ける計画手法</td></tr>
+      <tr><td>グリーンベルト</td><td>green belt</td><td>市街地の無制限な膨張を防ぐ緑地帯</td></tr>
+      <tr><td>ニュータウン</td><td>new town</td><td>計画的に建設された新市街地</td></tr>
+      <tr><td>アテネ憲章</td><td>Athens Charter</td><td>1933年CIAMで採択。都市の4機能（居住・余暇・労働・交通）を掲げる</td></tr>
+      <tr><td>セミラティス</td><td>semi-lattice</td><td>重なり合う部分集合からなる都市構造。ツリー状の階層に対置される</td></tr>
+      <tr><td>建築基準法</td><td>Building Standards Act</td><td>建築物の安全・防火・衛生の最低基準を定める法律（1950）</td></tr>
+      <tr><td>単体規定</td><td>stand-alone provisions</td><td>1棟ごとの建築物の安全に関する規定</td></tr>
+      <tr><td>集団規定</td><td>group provisions</td><td>市街地環境を守るため、用途・密度・高さ等を規制する規定</td></tr>
+      <tr><td>接道義務</td><td>obligation to front on a road</td><td>幅員4m以上の道路に2m以上接することを求める規定</td></tr>
+      <tr><td>2項道路</td><td>designated existing road</td><td>幅員4m未満の既存道路で特定行政庁が指定したもの</td></tr>
+      <tr><td>セットバック</td><td>setback</td><td>道路中心線から2m後退して敷地を下げること</td></tr>
+      <tr><td>建ぺい率</td><td>building coverage ratio</td><td>建築面積÷敷地面積</td></tr>
+      <tr><td>容積率</td><td>floor area ratio</td><td>延べ床面積÷敷地面積</td></tr>
+      <tr><td>天空率</td><td>sky ratio</td><td>斜線制限に代わる高さの算定手法（2002年導入）</td></tr>
+      <tr><td>建築確認</td><td>building confirmation</td><td>工事前に建築主事等が法令適合を審査する制度</td></tr>
+      <tr><td>都市計画区域</td><td>urban planning area</td><td>一体の都市として整備・開発・保全する区域</td></tr>
+      <tr><td>区域区分（線引き）</td><td>area division</td><td>市街化区域と市街化調整区域の区分</td></tr>
+      <tr><td>市街化調整区域</td><td>urbanization control area</td><td>市街化を抑制すべき区域。開発は原則不許可</td></tr>
+      <tr><td>用途地域</td><td>use district / zoning district</td><td>土地利用の用途を13種類に区分する地域地区</td></tr>
+      <tr><td>開発許可</td><td>development permission</td><td>開発行為を都道府県知事が許可する制度</td></tr>
+      <tr><td>地区計画</td><td>district plan</td><td>身近な地区単位で詳細な規制・誘導を定める計画</td></tr>
+      <tr><td>土地区画整理事業</td><td>land readjustment project</td><td>換地・減歩により公共施設と宅地を整備する事業</td></tr>
+      <tr><td>市街地再開発事業</td><td>urban redevelopment project</td><td>低未利用地の高度利用と都市機能更新を図る事業</td></tr>
+      <tr><td>コンパクトシティ</td><td>compact city</td><td>市街地を集約し、公共交通・徒歩で暮らせる都市</td></tr>
+      <tr><td>スマートグロース</td><td>smart growth</td><td>環境・経済・社会を持続させる成長管理</td></tr>
+      <tr><td>TOD</td><td>transit-oriented development</td><td>公共交通の駅を中心に職住近接を図る開発</td></tr>
+      <tr><td>TND</td><td>traditional neighborhood development</td><td>伝統的街区型の開発</td></tr>
+      <tr><td>ガバナンス</td><td>governance</td><td>多様な主体によるネットワーク型の統治</td></tr>
+      <tr><td>条例</td><td>local ordinance</td><td>地方自治体が制定する自治立法</td></tr>
+    </tbody>
+  </table>
+  </div>
+</section>
+
+
+<!-- ============ 東科大過去問 都市計画 出題分析 ============ -->
+
+
+<!-- ========================================================== -->
+<!-- ========================================================== -->
+<!-- ============  第2章  まちづくりがわかる  ============ -->
+<!-- ========================================================== -->
+<!-- ========================================================== -->
+
+<header class="hero" style="background:linear-gradient(135deg,#2a4a3e,#0f3a2a)">
+  <div class="wrap">
+    <div class="kicker">都市計画とまちづくりがわかる本 ／ 第2章</div>
+    <h1>まちづくりがわかる</h1>
+  </div>
+</header>
+
+<!-- ============ PART Ⅵ まちづくりの担い手 ============ -->
+<section class="part" id="p6">
+  <div class="part-head"><span class="no">PART Ⅵ</span><h2>まちづくりの担い手とルール</h2><span class="sub">41–44 ／ 誰がつくるか</span></div>
+  <p class="lead">第1章の「都市計画」が<b>行政の立場から都市を規制・誘導</b>するものだとすれば、第2章の「まちづくり」は<b>市民・NPO・企業・自治体が協働で</b>より良い地域をつくる活動です。主役は行政だけではありません。</p>
+
+  <div class="card" id="s41">
+    <h3><span class="num">41</span>まちづくりの担い手（4類型）<span class="pg">pp.100–103</span></h3>
+    <ul>
+      <li><b>行政セクター</b>：国・都道府県・市町村。都市計画法に基づく「法定都市計画」を定める主体。長所は公共性・公平性、短所は縦割り・手続きの重さ。</li>
+      <li><b>市民セクター</b>：住民・地域住民組織（自治会・町内会）、まちづくり協議会、NPO。生活者の視点で<b>きめ細かな課題</b>に対応。但し活動資金・組織力が課題。</li>
+      <li><b>企業セクター</b>：民間事業者。都市開発（再開発・ニュータウン）や商業施設立地を通じてまちの姿を変える。PFI手法で公共施設建設・運営も担う。</li>
+      <li><b>専門家セクター</b>：建築家・都市計画家・ランドスケープアーキテクト・社会学者・まちづくりコーディネーター。調査・計画案作成・合意形成支援。</li>
+    </ul>
+    <div class="tip">まちづくりの実践ではこの4者が<b>パートナーシップ</b>を形成することが重要。NPM（ニュー・パブリック・マネジメント）は行政の独立法人化・民営化・民間委託を進め、市民に対しても応分の負担を求める行政改革の流れ。</div>
+
+<div class="houmon-note"><b style="color:var(--gold);letter-spacing:.1em">過去問の出題</b><ul><li><span class="y">exam_arch_20238</span><span class="t">選択</span><span class="q">PFI（Private Finance Initiative）とまちづくり条例の組合せ出題</span><span class="a">→ 正解：PFI＝民間資金・経営能力活用して公共施設を建設運営</span></li></ul></div>
+</div>
+
+  <div class="card" id="s42">
+    <h3><span class="num">42</span>ルールづくりとまちづくり条例<span class="pg">pp.104–107</span></h3>
+    <ul>
+      <li>国が定める都市計画制度（用途地域・地区計画など）だけでは地域の個性に対応しきれないため、各自治体が<b>まちづくり条例</b>を制定する流れが1990年代以降広がった。</li>
+      <li>条例は<b>地域の独自ルール</b>として、建築物の高さ・色・素材・屋根形状などを規制・誘導。神戸市（1981）の「都市美観条例」が先駆け。</li>
+      <li><b>景観法（2004）</b>制定後、条例は景観計画・景観条例と連携する形に変化。地域の合意形成（ワークショップ・住民投票）を経て策定されることが多い。</li>
+      <li>課題：条例で定められたルールを守らない事業者への対応、所有者の合意取得、条例内容の柔軟な運用。</li>
+    </ul>
+    <div class="tip">「都市の個性」を守る手段として、条例は法定規制（都市計画法）を補完する役割。国の制度が「全国一律の底上げ」なら、条例は「地域独自の上乗せ」。</div>
+
+<div class="houmon-note"><b style="color:var(--gold);letter-spacing:.1em">過去問の出題</b><ul><li><span class="y">exam_arch_20248</span><span class="t">選択</span><span class="q">歴史的まちづくり関連法（古都保存法→伝統的建造物群保存地区→景観法→歴史まちづくり法）の年代順</span><span class="a">→ 正解：D→B→A→C</span></li><li><span class="y">exam_arch_20248</span><span class="t">小論文</span><span class="q">景観法制定プロセスを読んで「それぞれの地域で美しさを決める」方式の現代的課題を論じる</span><span class="a">→ 景観法の核心＝多様な主体の参画と合意形成が手続きとして法定</span></li></ul></div>
+</div>
+
+  <div class="card" id="s43">
+    <h3><span class="num">43</span>協働（パートナーシップ）<span class="pg">pp.108–111</span></h3>
+    <ul>
+      <li><b>協働</b>とは、市民・行政・企業がお互いの主体性を尊重しつつ、相互作用によって創造的な効果を生み出す関係。ただの「役割分担」ではない。</li>
+      <li>協働の<b>目的</b>：①縦割り行政では対応できない複合的課題への対応、②市民の知恵・地域愛の活用、③民間資金の導入。</li>
+      <li>具体例：まちづくり協議会（住民＋商店街＋企業＋行政）、PFI（民間資金で公共施設建設）、中心市街地活性化のTMO（Town Management Organization）。</li>
+      <li>課題：活動資金の確保、責任の所在の明確化、参加者の継続的な確保、対等な関係の構築（行政が主導権を握りがち）。</li>
+    </ul>
+    <div class="tip">2019年以降の過去問で「協働」「パートナーシップ」は出題頻度が上昇中。都市再生プロジェクトの多くはこの手法を用いている。</div>
+
+<div class="houmon-note"><b style="color:var(--gold);letter-spacing:.1em">過去問の出題</b><ul><li><span class="y">exam_arch_20228</span><span class="t">選択</span><span class="q">NPO・協働・まちづくり協議会の組合せ出題</span><span class="a">→ 協働＝市民・行政・企業が相互作用で創造的効果を生む関係</span></li><li><span class="y">exam_arch_20228</span><span class="t">選択</span><span class="q">協働とまちづくりのテーマコミュニティ・地域コミュニティの出題</span><span class="a">→ テーマコミュニティ＝自主保育・老人介護・環境問題などによる結びつき</span></li></ul></div>
+</div>
+
+  <div class="card" id="s44">
+    <h3><span class="num">44</span>非成長型社会とまちづくりの課題<span class="pg">pp.112–115</span></h3>
+    <ul>
+      <li>日本は高度成長期が終わり、<b>不動産価格の下降・人口減少・少子高齢化</b>が進む「非成長型社会」に突入。右肩上がりの成長を前提とした従来の都市開発システムは破綻。</li>
+      <li>都市づくりの<b>転換点</b>：①スプロール（無秩序な郊外化）をやめ、<b>コンパクトシティ</b>へ、②新規開発より既存ストックの活用へ、③量的拡大より質的改善へ。</li>
+      <li>具体的課題：空き家・空き店舗の活用、郊外住宅地の高齢化対応、中心市街地の空洞化（ドーナツ化）、住宅の流動化とストック改善。</li>
+      <li>高齢者対応：バリアフリー環境の整備、地域の見守りネットワーク、介護施設の地域分散立地（施設転用）。</li>
+    </ul>
+    <div class="tip">東京も例外ではない。都心人口の一時的な増加（都心居住ブーム）は、郊外の過疎化と表裏一体。全体として「人口減少時代の都市」という認識が必要。</div>
+
+<div class="houmon-note"><b style="color:var(--gold);letter-spacing:.1em">過去問の出題</b><ul><li><span class="y">exam_arch_20248</span><span class="t">小論文</span><span class="q">都市再生（シティリジェネレーション）とまちづくりの潮流に関する出題</span><span class="a">→ 戦後80年を振り返り、各時代から2つ選んで論じる</span></li></ul></div>
+</div>
+</section>
+
+<!-- ============ PART Ⅶ 分野別まちづくり ============ -->
+<section class="part" id="p7">
+  <div class="part-head"><span class="no">PART Ⅶ</span><h2>分野別まちづくり</h2><span class="sub">45–54 ／ 9つのアプローチ</span></div>
+  <p class="lead">まちづくりは多角的な分野からのアプローチが可能です。景観・歴史・防災・交通・福祉・環境……、それぞれが専門的な手法を持ちつつ、互いに重なり合っています。</p>
+
+  <!-- 景観まちづくり -->
+  <div class="card" id="s45">
+    <h3><span class="num">45</span>景観まちづくり（景観法と景観計画）<span class="pg">pp.116–121</span></h3>
+    <ul>
+      <li><b>景観法（2004年）</b>：日本初の景観総合立法。良好な景観の形成を促進し、美しく風格のある国土・潤いのある生活環境・個性的で活力ある地域社会の実現を目的。</li>
+      <li>制度の柱：①<b>景観行政団体</b>（都道府県・政令市・景観計画策定市町村）、②<b>景観計画</b>（区域ごとの景観形成目標と行為の制限基準）、③<b>景観重要建造物・樹木・公共施設</b>の指定。</li>
+      <li>景観形成の手法：高さ・階数・敷地規模・屋根・低層部用途・看板・色彩・壁線・材料などの規制・誘導。</li>
+      <li>景観に関する用語：<b>スカイライン</b>（空と建築群の境界線）、<b>ランドスケープ</b>（景観を構成する諸要素）、<b>ランドマーク</b>（地域を特徴づける顕著な景観要素）、<b>ビスタ</b>（見通しの良い眺望軸）、<b>アイストップ</b>（軸線上の視線を止める建築物）。</li>
+    </ul>
+    <div class="tip">景観法の核心は「<b>地域住民の多様な主体の参画と合意形成</b>を手続きとして法定」したこと。補完性の原則——地域のことは地域で決める。これまでの都市計画と比べ、市民参加の比重が高いのが特徴。</div>
+
+<div class="houmon-note"><b style="color:var(--gold);letter-spacing:.1em">過去問の出題</b><ul><li><span class="y">exam_arch_20218</span><span class="t">選択</span><span class="q">景観法と重要な用語（景観行政団体・景観計画）の出題</span><span class="a">→ 景観法2004年制定、景観行政団体は現在526自治体</span></li><li><span class="y">exam_arch_20238</span><span class="t">選択</span><span class="q">景観法関連の選択肢</span><span class="a">→ 景観マスタープランではなく景観計画が法定計画</span></li><li><span class="y">exam_arch_20248</span><span class="t">選択</span><span class="q">景観法・伝統的建造物群保存地区・古都保存法の制度比較</span><span class="a">→ 重要伝統的建造物群保存地区＝文化財保護法第142条</span></li></ul></div>
+</div>
+
+  <div class="card" id="s46">
+    <h3><span class="num">46</span>歴史的まちづくり（文化財と保存）<span class="pg">pp.122–127</span></h3>
+    <ul>
+      <li><b>文化財保護法</b>に基づく指定：国宝・重要文化財（建造物の単体指定）、重要伝統的建造物群保存地区（面的指定）、登録有形文化財（緩やかな保護）。</li>
+      <li>昭和50年代以降、単体の文化財保護だけでなく、<b>歴史的風土・街並み</b>を面的に保存する動きが進む。<b>伝統的建造物群保存地区</b>は現在全国に約120地区指定。</li>
+      <li><b>歴史まちづくり法（2008年）</b>：歴史的建造物・街並みの<b>活用・再生</b>を通じた地域活性化を支援。従来の「保護中心」から「活用中心」への転換。</li>
+      <li>課題：駐車場不足・空き家増加・後継者不足・観光客急増、個人所有の歴史的建物の維持コスト。</li>
+    </ul>
+    <div class="tip">都市計画における「歴史」は、単なる過去の遺物ではなく、<b>まちのアイデンティティ</b>を構成する要素。城下町のように「歴史を生かしたまちづくり」は現代の地方都市再生の鍵となっている。</div>
+
+<div class="houmon-note"><b style="color:var(--gold);letter-spacing:.1em">過去問の出題</b><ul><li><span class="y">exam_arch_20228</span><span class="t">選択</span><span class="q">重要伝統的建造物群保存地区の説明として正しいものはどれか</span><span class="a">→ 正解：ウ 周囲の環境と一体をなして歴史的風景を形成している価値が高い</span></li><li><span class="y">exam_arch_20248</span><span class="t">選択</span><span class="q">歴史的まちづくり関連法の年代順出題</span><span class="a">→ 古都保存法(1966)→伝統的建造物群保存地区(1975)→景観法(2004)→歴史まちづくり法(2008)</span></li></ul></div>
+</div>
+
+  <div class="card" id="s47">
+    <h3><span class="num">47</span>防災まちづくり<span class="pg">pp.128–133</span></h3>
+    <ul>
+      <li>阪神淡路大震災（1995）を契機に、都市計画に防災の視点が組み込まれるようになった。</li>
+      <li><b>地域防災計画</b>：災害予防・応急対応・普及・復興の3段階。自治体ごとに地理的条件に応じて策定。</li>
+      <li><b>防災骨格づくり</b>：都市レベルで避難路・延焼遮断体・オープンスペースのネットワーク形成。<b>防災公園</b>は広域避難地・緩衝緑地の機能を持つ。</li>
+      <li><b>地区レベルの防災手法</b>：防災教育・組織づくり（自主防災組織）・防災訓練（発災対応型・図上訓練）・防災地図づくり・イベント・狭隘道路拡幅・オープンスペース確保・建物不燃化。</li>
+      <li><b>密集市街地</b>対策：細街路・接道不良・老朽住宅・用途混在の課題。市街地再開発・改善型まちづくり（スクラップアンドビルドでなく小さな改善の積み重ね）。</li>
+    </ul>
+    <div class="tip">関東大震災（1923）→帝都復興院・後藤新平、阪神淡路大震災（1995）→防災まちづくり、東日本大震災（2011）→復興まちづくり。災害は都市計画の大きな転換点となってきた。</div>
+
+<div class="houmon-note"><b style="color:var(--gold);letter-spacing:.1em">過去問の出題</b><ul><li><span class="y">20258</span><span class="t">小論文</span><span class="q">関東大震災100年の歴史から、防災まちづくりの歴史と課題を論じる</span><span class="a">→ 関東大震災1923→帝都復興院→阪神大震災1995→防災まちづくり</span></li></ul></div>
+</div>
+
+  <div class="card" id="s48">
+    <h3><span class="num">48</span>交通まちづくり（TDM・TOD・ボンエルフ）<span class="pg">pp.134–139</span></h3>
+    <ul>
+      <li><b>TDM（交通需要マネジメント）</b>：自動車利用者の行動変更を促し、道路混雑を緩和する手法の体系。モーダルシフト（自動車から公共交通へ）を基本姿勢とする。</li>
+      <li><b>TOD（Transit Oriented Development）</b>：駅を中心に商業・居住・公共施設を集約する開発方式。アメリカの新都市主義（ニューアーバリズム）と共に近年日本でも注目。</li>
+      <li><b>ボンエルフ</b>（オランダ）：歩車共存道路。自動車の速度を抑制し、歩行者・自転車・自動車が共存する生活の庭としての道路空間。</li>
+      <li><b>コミュニティゾーン</b>：歩行者の通行を図るための面的かつ総合的な交通対策地区。ソフト手法（啓蒙）とハード手法（歩道拡幅・信号改善）を組み合わせる。</li>
+      <li>都市内交通の課題：自動車依存の見直し、公共交通（LRT・バス・路面電車）の活用、歩行者交通網の整備、駅前広場の交通処理と景観の両立。</li>
+    </ul>
+    <div class="tip">2024年の過去問でTODが選択肢に登場。都市再生特別措置法に基づく立地適正化計画と連携する形で、国土交通省もTODを都市づくりの重要手法として推進している。</div>
+
+<div class="houmon-note"><b style="color:var(--gold);letter-spacing:.1em">過去問の出題</b><ul><li><span class="y">exam_arch_20248</span><span class="t">選択</span><span class="q">TOD（駅中心の開発方式）に関する記述として正しいものはどれか</span><span class="a">→ 正解：TODはTransit Oriented Developmentの略。駅を中心に多様な都市機能を配置</span></li></ul></div>
+</div>
+
+  <div class="card" id="s49">
+    <h3><span class="num">49</span>福祉まちづくり（バリアフリー・ユニバーサルデザイン）<span class="pg">pp.140–145</span></h3>
+    <ul>
+      <li><b>福祉まちづくり</b>は「障害のある人を社会から締め出さず、普通の生活を営む」という<b>ノーマライゼーション</b>の理念に基づく。</li>
+      <li><b>バリアフリーデザイン</b>：障害者・高齢者が自立した生活を送るため、障害を理由とした差別をなくすデザイン。車いす用スロープ・視覚障害者用点字ブロック・音声案内など。</li>
+      <li><b>ユニバーサルデザイン</b>：バリアフリーを含みつつ、「特定の少数の人だけでなく<b>すべての人にとってより良い</b>」ことを目指す。段差のない路面・広いドア・手すり・明るい照明。</li>
+      <li><b>福祉インフラ</b>：道路・公園・河川・建物・住宅といった社会資本を福祉の側面から見直したもの。これらが普遍的に福祉に配慮されることで「ごく当たり前な環境」になる。</li>
+      <li><b>地域安心拠点</b>：福祉・保健・医療の機能を持つ施設を地域の核として配置。小学校区・中学校区レベルの圏域ごとに拠点を作り、高齢者の生活圏を支える。</li>
+    </ul>
+    <div class="tip">過去問で「福祉」は3/27の出題頻度。児童福祉法・介護保険制度と連携して、施設整備だけでなく<b>コミュニティづくり</b>も重要な課題。</div>
+
+<div class="houmon-note"><b style="color:var(--gold);letter-spacing:.1em">過去問の出題</b><ul><li><span class="y">exam_arch_20218</span><span class="t">穴埋め</span><span class="q">福祉・児童福祉法・ユニバーサルデザインに関する出題</span><span class="a">→ 福祉＝3回の出題頻度。バリアフリーとの違いも問われる</span></li></ul></div>
+</div>
+
+  <div class="card" id="s50">
+    <h3><span class="num">50</span>環境まちづくり（持続可能な発展・低炭素・循環型）<span class="pg">pp.146–153</span></h3>
+    <ul>
+      <li><b>持続可能な発展（Sustainable Development）</b>：1992年リオ宣言で採択された国際共通理念。行動計画として<b>アジェンダ21</b>がある。現在の都市の在り方を問う基本原則。</li>
+      <li><b>低炭素社会</b>：二酸化炭素排出の少ない社会（脱炭素社会）。具体的手法：省エネルギー（ヒートポンプ・LED・コジェネ）、再生可能エネルギー（太陽光・風力・バイオマス）、建築物の高断熱・高気密、CASBEEによる省エネ設計。</li>
+      <li><b>循環型まちづくり</b>：資源の採取・廃棄を最小にし、一度使用したものが繰り返し使用されるようなシステム。ごみの収集・リサイクル・処理施設・コミュニティ活動の場などを総合的に整備。</li>
+      <li><b>エコロジカル・プランニング</b>：I.マクハーグが確立した方法論。自然と社会の総和として環境を捉え、最適な土地利用の形を見いだす。</li>
+      <li><b>エコシティ</b>：環境配慮が十分に行き届いた都市の理想像。公害防止・緑の保全・環境教育・市民参加を含む。</li>
+    </ul>
+    <div class="tip">「低炭素社会」は2020年代の最重要課題。都市づくりにおいても、土地利用（コンパクトシティによる自動車依存削減）・建築（省エネ基準の強化）・エネルギー（地域熱供給・太陽光）の総合的なアプローチが必要。</div>
+
+<div class="houmon-note"><b style="color:var(--gold);letter-spacing:.1em">過去問の出題</b><ul><li><span class="y">exam_arch_20228</span><span class="t">選択</span><span class="q">環境まちづくり・アジェンダ21・低炭素社会に関する記述</span><span class="a">→ アジェンダ21＝1992年リオサミットで採択された21世紀への行動計画</span></li></ul></div>
+</div>
+</section>
+
+<!-- ============ PART Ⅷ まちづくりの実践 ============ -->
+<section class="part" id="p8">
+  <div class="part-head"><span class="no">PART Ⅷ</span><h2>まちづくりの実践と現代課題</h2><span class="sub">55–60 ／ 具体的な取り組み</span></div>
+  <p class="lead">ここまでの法制度・分野別手法を、実際の都市でどう活用するか。具体的な事業の進め方、地域特性への対応、そして「これから」の都市像を考えます。</p>
+
+  <div class="card" id="s51">
+    <h3><span class="num">51</span>中心市街地の再生（空洞化・TMO）<span class="pg">pp.154–157</span></h3>
+    <ul>
+      <li><b>中心市街地の空洞化</b>は自動車保有率の上昇に伴う郊外化・大規模商業施設の郊外立地が主因。ドーナツ化現象と呼ばれる。</li>
+      <li>活性化の柱は<b>TMO（Town Management Organization）</b>——地元主体（商工会議所・NPO・地元企業）が中心となり、総合的な施策を推進。</li>
+      <li>具体的なアイデア：①公共公益施設の集積（市役所・病院・保育園を中心市街地に）、②空き店舗の活用（福祉拠点・NPO事務所）、③交通インフラの整備（公共交通連携・歩行環境）、④中心市街地居住の促進、⑤ソフトな仕組み（地域通貨・イベント）。</li>
+      <li><b>インナーシティ</b>は空洞化が極端に進んだ都心住宅地区。治安・衛生環境の悪化が顕著。</li>
+    </ul>
+    <div class="tip">東京でも下北沢・吉祥寺のような地域は、市民参加と協働によって独特のまちの魅力を守り続けている。「地元主体」が活性化のカギ。</div>
+  </div>
+
+  <div class="card" id="s52">
+    <h3><span class="num">52</span>まちづくり事業の手法（土地区画整理・再開発）<span class="pg">pp.158–163</span></h3>
+    <ul>
+      <li><b>土地区画整理事業</b>：都市計画区域内の土地について、公共施設の整備改善と宅地利用の増進を図るため、区画形質の変更と公共施設の新設・変更を行う。</li>
+      <li>事業の要点：<b>換地</b>（従前の宅地から新しい宅地への所有権の変更）、<b>減歩</b>（公共用地・保留地のための用地提供）、<b>保留地</b>（事業費に充てるために売却する用地）。</li>
+      <li><b>市街地再開発事業</b>：土地利用の細分化・老朽木造建築の密集・公共施設不足の地域で、土地の高度利用と都市機能の更新を図る。</li>
+      <li>第1種再開発：権利変換方式（土地・建物所有権を再開発ビルの区分所有権と等価交換）。第2種：用地買収方式（施行者が買収または収用）。</li>
+    </ul>
+    <div class="tip">これらは第1章の都市計画法でも触れたが、第2章では「事業の執行体」（組合・個人・公的機関）や「権利者の合意」といったまちづくり側面から見直す。</div>
+
+<div class="houmon-note"><b style="color:var(--gold);letter-spacing:.1em">過去問の出題</b><ul><li><span class="y">exam_arch_20228</span><span class="t">選択</span><span class="q">土地区画整理・市街地再開発の組合せ出題</span><span class="a">→ 換地・減歩・保留地の関係。再開発＝権利変換方式 vs 用地買収方式</span></li></ul></div>
+</div>
+
+  <div class="card" id="s53">
+    <h3><span class="num">53</span>市民参加の手法（ワークショップ・デザインゲーム）<span class="pg">pp.164–169</span></h3>
+    <ul>
+      <li><b>ワークショップ</b>：地域に関わる多様な立場の人が参加し、共同作業を通じて計画づくりを進める方法。効果：体験共有・意見表出・意見集約・コミュニケーション深化。</li>
+      <li><b>まちづくりデザインゲーム</b>：模型を用いて空間計画のシミュレーションを行い、目標イメージを関係者で共有する手法。新しい公園計画や駅前再開発などに用いられる。</li>
+      <li><b>参加のデザイン</b>：ワークショップ・コンペティション・コンクールなど。課題は「どの段階で・誰が・どのような目的で参加するか」を体系づけること。</li>
+      <li><b>まちづくり協議会</b>：住民・商店街・企業・行政・専門家が集まる地域のまちづくり組織。公害対策・歴史的街並み保全・震災復興など住民の発意で結成されることが多い。</li>
+    </ul>
+    <div class="tip">都市計画法は地区計画等の案に「権利者の参加を義務付け」ている。住民参加は「法的義務」から「日常的な実践」へと広がっている。</div>
+  </div>
+
+  <div class="card" id="s54">
+    <h3><span class="num">54</span>NPOと市民まちづくりの財源<span class="pg">pp.170–173</span></h3>
+    <ul>
+      <li><b>NPO法人</b>：特定非営利活動促進法（1998年）に基づく法人格。登録により非課税・免税扱い。収益を上げてもよいが個人に配分してはならない（非営利の基本）。</li>
+      <li><b>市民まちづくりの財源</b>：①民間資金（会費・寄付金・事業収入・民間業務委託・出資金）、②公的資金（補助金・助成金・委託料）、③非営利セクター資金（民間財団・基金・公益信託・融資）、④現物支給（行政専門家派遣・企業商品提供・空き会議室貸与）。</li>
+      <li>課題：公的資金では事業の発意や内容決定権が行政にあり、必ずしもNPOの目指す事業ができるわけではない。</li>
+      <li><b>まちづくりセンター</b>：行政と市民の中間・中立的な立場でまちづくり活動をバックアップする機関。民間セクターと行政セクターがあり、それぞれに課題（行政の縦割り・民間の信用不足）。</li>
+    </ul>
+    <div class="tip">東京都では「まちづくり支援センター」を設置し、NPO活動への助言・支援を行っている。市民まちづくりは行政の対応できない「きめ細かな課題」に対応する存在。</div>
+
+<div class="houmon-note"><b style="color:var(--gold);letter-spacing:.1em">過去問の出題</b><ul><li><span class="y">exam_arch_20228</span><span class="t">選択</span><span class="q">NPOに関する記述として正しいものはどれか</span><span class="a">→ 特定非営利活動促進法（1998年）に基づく法人格。収益は上げてもよいが個人に配分してはならない</span></li><li><span class="y">exam_arch_20238</span><span class="t">選択</span><span class="q">NPO・協働・まちづくり協議会の組合せ出題</span><span class="a">→ 3回中2回はNPOと協働が組み合わされた選択肢</span></li></ul></div>
+</div>
+
+  <div class="card" id="s55">
+    <h3><span class="num">55</span>コンパクトシティと立地適正化計画<span class="pg">pp.174–177</span></h3>
+    <ul>
+      <li><b>コンパクトシティ</b>：都市の中心部に行政・商業・住宅など多様な都市機能を集中させ、徒歩圏内に集約させた小規模なまちづくり。ヨーロッパで1990年代から提言。</li>
+      <li>目的：自動車利用率の減少・交通渋滞緩和・農地緑地の保全・職住近接・中心市街地の活性化・地域コミュニティの復活。</li>
+      <li><b>立地適正化計画</b>：都市再生特別措置法（2014年改正）に基づく。居住機能や公共施設を<b>誘導区域</b>に集約する計画。コンパクトシティ実現の主要ツール。</li>
+      <li>高齢化社会において特に重要：「歩いて暮らせるまち」は高齢者の自立・介護負担の軽減に直接つながる。</li>
+    </ul>
+    <div class="tip">都市計画法上、立地適正化計画は「都市再生特別措置法」の枠内で策定される。2019年の過去問で小論文の語群に含まれている。</div>
+
+<div class="houmon-note"><b style="color:var(--gold);letter-spacing:.1em">過去問の出題</b><ul><li><span class="y">2019</span><span class="t">小論文</span><span class="q">立地適正化計画（都市再生特別措置法に基づく）に関する小論文出題</span><span class="a">→ コンパクトシティ実現の主要ツール。誘導区域に居住機能を集約</span></li></ul></div>
+</div>
+
+  <div class="card" id="s56">
+    <h3><span class="num">56</span>都市再生（シティ・リジェネレーション）<span class="pg">pp.178–181</span></h3>
+    <ul>
+      <li><b>都市再生</b>：地区レベルの道路・公園・コミュニティ施設・防災施設・景観・福祉向上施設の整備に対し国が補助し、従来の都市ストックと民間の力によって都市の活力を回復させる取り組み。</li>
+      <li>都市再生特別措置法（2004年制定）：<b>都市再生緊急整備地域</b>（重点的に再開発を行う地域）、<b>都市再生特別地区</b>（用途地域・容積率等の規制を適用除外とし、自由度の高い計画が可能）を創設。</li>
+      <li><b>ジェントリフィケーション</b>：衰退地区に再開発や新産業の発展で中間所得層が流入し、地域が高級化する現象。地域の地価上昇・コミュニティの変化をもたらす。都市再生の結果としてしばしば問題になる。</li>
+      <li><b>PFI（Private Finance Initiative）</b>：公共施設の建設・維持管理・運営を民間の資金・経営能力・技術的能力で行う手法。都市再生事業の重要な資金調達手段。</li>
+    </ul>
+    <div class="tip">2024年の過去問小論文は「都市再生とまちづくりの潮流」をテーマに、戦後80年の各時代から2つ選んで論じる出題。都市再生は2004年の法制定以来、20年以上続く最重要課題。</div>
+
+<div class="houmon-note"><b style="color:var(--gold);letter-spacing:.1em">過去問の出題</b><ul><li><span class="y">exam_arch_20218</span><span class="t">選択</span><span class="q">都市再生・都市再生特別措置法に関する記述として正しいものはどれか</span><span class="a">→ 正解：ウ 都市再生特別地区では用途地域等の規制が適用除外となる</span></li><li><span class="y">exam_arch_20228</span><span class="t">選択</span><span class="q">都市再生の手法として適切なものはどれか</span><span class="a">→ 都市再生緊急整備地域の指定。民間資金（PFI）の活用</span></li><li><span class="y">exam_arch_20248</span><span class="t">小論文</span><span class="q">戦後80年の都市再生の歩みから、1945–1960／1960–1980／1980–2000／2000–2020／2020–2025の各時代から2つ選んで論じる</span><span class="a">→ 都市再生（都市再開発法）は1969年制定。都市再生特別措置法は2004年制定</span></li></ul></div>
+</div>
+</section>
+
+<!-- ============ PART Ⅸ まちづくりのこれから ============ -->
+<section class="part" id="p9">
+  <div class="part-head"><span class="no">PART Ⅸ</span><h2>まちづくりのこれから</h2><span class="sub">57–60 ／ これから</span></div>
+  <p class="lead">非成長型社会・少子高齢化・気候変動……、都市を取り巻く環境は大きく変わりつつあります。まちづくりは「拡大・成長」の時代から「持続・再生」の時代への転換期にあります。</p>
+
+  <div class="card" id="s57">
+    <h3><span class="num">57</span>内発的発展と地域の個性<span class="pg">pp.182–185</span></h3>
+    <ul>
+      <li><b>内発的発展</b>：海外からの技術・資金援助に頼らず、地域住民自らがコミュニティ組織を通じた主体的な合意形成を経て、地域形成を行う発展のあり方。途上国の開発理念として提唱されたが、日本の地方都市再生でも重要。</li>
+      <li><b>城下町</b>の現代性：固有の地域文化を育む拠点としての城下町が、現代の都市づくりの原点として再評価されている。多様な環境要素と住居スタイルが組み立てられた城下町の「装置」は、多様性と地域の個性を重視する現代社会で再び重要な意味を持つ。</li>
+      <li><b>ゲニウス・ロキ（地霊）</b>：場所に現れる際立った雰囲気・土地特性。歴史・文化の蓄積によって生み出される固有の価値。まちづくりにおいて「場所性」を重視する思考として注目される。</li>
+    </ul>
+    <div class="tip">日本の地方都市は、際限なく広がる郊外化と都心部の衰退の中で危機にある。「内発的発展」と「城下町を生かした都市づくり」は、地域の独自性を取り戻すためのキーワード。</div>
+
+<div class="houmon-note"><b style="color:var(--gold);letter-spacing:.1em">過去問の出題</b><ul><li><span class="y">exam_arch_20218</span><span class="t">選択</span><span class="q">パタン・ランゲージ（C.アレクサンダー）と都市はツリーではないの組合せ出題</span><span class="a">→ アレクサンダー＝セミラティス構造とツリー構造の対比。パタン・ランゲージは253のパタンから成る</span></li></ul></div>
+</div>
+
+  <div class="card" id="s58">
+    <h3><span class="num">58</span>これからのまちづくりのキーワード<span class="pg">pp.186–191</span></h3>
+    <ul>
+      <li><b>環境共生</b>：自然との調和を基本に、環境への負荷を最小にした都市の在り方。省エネルギー・節水・緑化・リサイクル・LCA（ライフサイクルアセスメント）手法。</li>
+      <li><b>スマートシティ</b>：ICT（情報通信技術）を活用し、交通・エネルギー・防災・医療など都市機能を効率的に管理する都市。データに基づく意思決定・個別化されたサービス提供。</li>
+      <li><b>まちの循環（リジェネラティブシティ）</b>：建築・都市の「使い捨て」をやめ、増改築・リノベーション・適応的再利用によりストックを長く使い続ける考え方。</li>
+      <li><b>ネイバーフッド</b>：近隣住区（ペリー）の概念を現代に再解釈したもの。地域のコミュニティを核とした小規模なまちづくり。</li>
+      <li><b>多様性と包摂</b>：性別・年齢・障害の有無・国籍に関わらず、すべての人が自分らしく生きられる都市。</li>
+    </ul>
+    <div class="tip">これらのキーワードは都市計画の試験で「小論文」の題材として頻出。単に用語を暗記するだけでなく、各自の具体例（地域の実践事例）を持って論じられることが重要。</div>
+  </div>
+
+  <div class="card" id="s59">
+    <h3><span class="num">59</span>東京の将来像（参考）<span class="pg">pp.192–195</span></h3>
+    <ul>
+      <li>首都機能移転の議論は、人口集中問題・物価高騰・官庁コスト削減を目的として過去に何度か提起されてきた。現状では移転は進んでいない。</li>
+      <li><b>東京都の緑のマスタープラン</b>：東京の自然構造を支配する「水系」を重視し、水系を軸として緑のネットワークを展開。①自然システムの見出し、②都市構造の基本要素化、③現存資源の有効活用。</li>
+      <li>都心居住の推進・空き家対策・福祉施設の地域分散・省エネ基準の強化……、東京も地方都市と同じ「非成長型社会」の課題に直面している。</li>
+    </ul>
+    <div class="tip">東京一極集中は日本の都市問題の縮図。反面、東京の都市づくりの取り組み（緑のマスタープラン・オリンピック後の都市デザイン・再開発）は他の地域のモデルともなっている。</div>
+  </div>
+
+  <div class="card" id="s60">
+    <h3><span class="num">60</span>まちづくりと建築の接点<span class="pg">pp.196–199</span></h3>
+    <ul>
+      <li>まちづくりと建築の<b>接点</b>：①個別建築が街並みに与える影響（高さ・色・素材・低層部用途）、②地区全体のデザインルール（条例・地区計画）、③公共建築が地域に果たす役割（まちづくりの拠点）、④ワークショップ・デザインゲームでの住民参加（専門家の役割）。</li>
+      <li>建築家は単に「建物を設計する」だけでなく、<b>まちづくりのコーディネーター</b>としての役割も求められる。地域住民の合意形成を支援し、行政との橋渡し役も担う。</li>
+      <li><b>総合設計制度</b>：公開空地の確保により、容積率・高さ・斜線制限を特例的に緩和する建築基準法の制度。都市の公共性を建築で実現する手法。</li>
+    </ul>
+    <div class="tip">この総復習資料の最後に、「建築を志す者がまちづくりを知る意味」をまとめました。まちづくりの視点を持った建築家は、これからの日本の都市づくりに必要な人材です。</div>
+  </div>
+</section>
+
+<section class="part" id="koumon">
+  <div class="part-head"><span class="no">KOUMON</span><h2>東科大過去問 都市計画 出題分析</h2><span class="sub">H23–H29（2011–2017）・2019・exam_arch_20218–20258 計19題</span></div>
+  <p class="lead">東京科学大学（旧東工大）建築学系専門科目では、都市計画の問題は<b>「Ⅰ−3 建築計画」</b>（10穴埋め）や<b>小論文</b>として出題される。直近5年（20218–20258）は都市計画主干考点の密度が高く、思想史から法制度・現代課題まで幅広く問われている。本分析は H23 から H29、2019、exam_arch_20218–20258 の計19題に現れた都市計画キーワードを集計したもの。</p>
+
+  <!-- 頻出度グラフ -->
+  <div class="card" style="padding:22px 26px">
+    <h3><span class="num">F</span>頻出度 TOP 15（登場した過去問の数）</h3>
+    <p class="note">横棒の長さが出題頻度。青＝頻出（5回以上）、茶＝重要（3–4回）、灰＝その他。</p>
+    <div class="examtbl">
+      <tr><td>都市計画</td><td style="width:360px"><div style="background:#e9e2d2;border-radius:3px;overflow:hidden;height:18px"><div style="background:#1f4e79;width:100%;height:100%"></div></div></td><td class="c">11</td></tr>
+      <tr><td>住居（住宅）</td><td style="width:360px"><div style="background:#e9e2d2;border-radius:3px;overflow:hidden;height:18px"><div style="background:#1f4e79;width:73%;height:100%"></div></div></td><td class="c">8</td></tr>
+      <tr><td>まちづくり</td><td style="width:360px"><div style="background:#e9e2d2;border-radius:3px;overflow:hidden;height:18px"><div style="background:#1f4e79;width:64%;height:100%"></div></div></td><td class="c">7</td></tr>
+      <tr><td>関東大震災</td><td style="width:360px"><div style="background:#e9e2d2;border-radius:3px;overflow:hidden;height:18px"><div style="background:#1f4e79;width:55%;height:100%"></div></div></td><td class="c">6</td></tr>
+      <tr><td>景観</td><td style="width:360px"><div style="background:#e9e2d2;border-radius:3px;overflow:hidden;height:18px"><div style="background:#1f4e79;width:55%;height:100%"></div></div></td><td class="c">6</td></tr>
+      <tr><td>建築基準法</td><td style="width:360px"><div style="background:#e9e2d2;border-radius:3px;overflow:hidden;height:18px"><div style="background:#b23a2e;width:45%;height:100%"></div></div></td><td class="c">5</td></tr>
+      <tr><td>都市計画法</td><td style="width:360px"><div style="background:#e9e2d2;border-radius:3px;overflow:hidden;height:18px"><div style="background:#b23a2e;width:45%;height:100%"></div></div></td><td class="c">5</td></tr>
+      <tr><td>近隣住区</td><td style="width:360px"><div style="background:#e9e2d2;border-radius:3px;overflow:hidden;height:18px"><div style="background:#b23a2e;width:36%;height:100%"></div></div></td><td class="c">4</td></tr>
+      <tr><td>ニュータウン</td><td style="width:360px"><div style="background:#e9e2d2;border-radius:3px;overflow:hidden;height:18px"><div style="background:#b23a2e;width:36%;height:100%"></div></div></td><td class="c">4</td></tr>
+      <tr><td>区域区分・線引き</td><td style="width:360px"><div style="background:#e9e2d2;border-radius:3px;overflow:hidden;height:18px"><div style="background:#b23a2e;width:36%;height:100%"></div></div></td><td class="c">4</td></tr>
+      <tr><td>田園都市</td><td style="width:360px"><div style="background:#e9e2d2;border-radius:3px;overflow:hidden;height:18px"><div style="background:#b23a2e;width:36%;height:100%"></div></div></td><td class="c">4</td></tr>
+      <tr><td>都市再生</td><td style="width:360px"><div style="background:#e9e2d2;border-radius:3px;overflow:hidden;height:18px"><div style="background:#b23a2e;width:36%;height:100%"></div></div></td><td class="c">4</td></tr>
+      <tr><td>都市計画区域</td><td style="width:360px"><div style="background:#e9e2d2;border-radius:3px;overflow:hidden;height:18px"><div style="background:#b23a2e;width:36%;height:100%"></div></div></td><td class="c">4</td></tr>
+      <tr><td>景観法</td><td style="width:360px"><div style="background:#e9e2d2;border-radius:3px;overflow:hidden;height:18px"><div style="background:#b23a2e;width:36%;height:100%"></div></div></td><td class="c">4</td></tr>
+      <tr><td>ハワード</td><td style="width:360px"><div style="background:#e9e2d2;border-radius:3px;overflow:hidden;height:18px"><div style="background:#b23a2e;width:27%;height:100%"></div></div></td><td class="c">3</td></tr>
+      <tr><td>ライト</td><td style="width:360px"><div style="background:#e9e2d2;border-radius:3px;overflow:hidden;height:18px"><div style="background:#b23a2e;width:45%;height:100%"></div></div></td><td class="c">5</td></tr>
+      <tr><td>コルビュジエ</td><td style="width:360px"><div style="background:#e9e2d2;border-radius:3px;overflow:hidden;height:18px"><div style="background:#b23a2e;width:27%;height:100%"></div></div></td><td class="c">3</td></tr>
+      <tr><td>バロック</td><td style="width:360px"><div style="background:#e9e2d2;border-radius:3px;overflow:hidden;height:18px"><div style="background:#b23a2e;width:27%;height:100%"></div></div></td><td class="c">3</td></tr>
+      <tr><td>市街化区域</td><td style="width:360px"><div style="background:#e9e2d2;border-radius:3px;overflow:hidden;height:18px"><div style="background:#b23a2e;width:27%;height:100%"></div></div></td><td class="c">3</td></tr>
+      <tr><td>グリーンベルト</td><td style="width:360px"><div style="background:#e9e2d2;border-radius:3px;overflow:hidden;height:18px"><div style="background:#b23a2e;width:27%;height:100%"></div></div></td><td class="c">3</td></tr>
+      <tr><td>ゲデス</td><td style="width:360px"><div style="background:#e9e2d2;border-radius:3px;overflow:hidden;height:18px"><div style="background:#b23a2e;width:27%;height:100%"></div></div></td><td class="c">3</td></tr>
+    </div>
+  </div>
+
+  <!-- 4つの最重要ポイント -->
+  <div class="grid2">
+    <div class="card" style="margin:0">
+      <h3><span class="num">①</span>思想史の定番：人物＋著書＋概念</h3>
+      <p>H25-1（ハワード・アンウィン・明日の田園都市）、H26-1（近隣住区・アレクサンダー・パタンランゲージ）、H29-1（コルビュジエ・モジュロール）、exam_arch_20218（ハワード・オーウェン・アンウィン・ゲデス・ジェイコブス・ポリス）、exam_arch_20228（ペリー・ラドバーン・クルドサック・ゲデス・パタンランゲージ）、exam_arch_20238（コルビュジエ・バロック・ラドバーン）、exam_arch_20258（CIAM・オスマン・ゲデス）。
+      <ul>
+        <li><b>必ず出る</b>：ハワード＝田園都市／グリーンベルト／人口3万2,000人（4回）</li>
+        <li><b>よく出る</b>：近隣住区（ペリー）、ラドバーン（スーパーブロック＋クルドサック）、田園都市（4回）、グリーンベルト（3回）</li>
+        <li><b>CIAM／アテネ憲章／4機能</b>は2019・20258で出たばかり、ここ2年は継続出題の可能性高い</li>
+        <li><b>ジェイコブスの4条件</b>は20218で穴埋め、今後も問われる</li>
+      </ul>
+    </div>
+    <div class="card" style="margin:0">
+      <h3><span class="num">②</span>日本史の定番：震災・復興・ニュータウン</h3>
+      <p>関東大震災が6回とダントツ。exam_arch_20228は城下町・東京市区改正・市区改正まで日本古代〜近代まで総動員。</p>
+      <ul>
+        <li><b>関東大震災（6回）</b>＋同潤会（20248）＋帝都復興院はセット</li>
+        <li><b>ニュータウン</b>：千里（H26-1）・多摩（H26-1、H29-1）・愛知県刈谷？ 第1号は千里ニュータウン（1962）</li>
+        <li><b>城下町・条坊制</b>（20228）は古代都市の暗記度チェック</li>
+        <li><b>市区改正</b>（20228）：東京市区改正条例1888・エンデ＆ベックマン</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="grid2" style="margin-top:14px">
+    <div class="card" style="margin:0">
+      <h3><span class="num">③</span>都市計画法の中核：区域区分と用途地域</h3>
+      <p>法令系は線引き・区域区分・市街化区域・市街化調整区域が4回ずつ。用途地域は2回（20218・20238）。開発許可・建ぺい率・容積率の計算は20218で出た。</p>
+      <ul>
+        <li><b>線引き＝市街化区域＋市街化調整区域</b>（H24-1・H29-1・20258）</li>
+        <li><b>用途地域13種類</b>（20238）：低層住居専用・中高層住居専用・準住居・商業・工業専用</li>
+        <li><b>区域区分</b>（20218・20258）：線引き有無を含む区域区分の概念</li>
+        <li><b>建築基準法</b>（5回）と併せて問われる。高度地区（20228・20258）、防火地域（20238）</li>
+      </ul>
+    </div>
+    <div class="card" style="margin:0">
+      <h3><span class="num">④</span>現代課題：景観・まちづくり・都市再生</h3>
+      <p>景観（6回）とまちづくり（7回）は直近の主流。協働・補完性の原則・NPOなどガバナンス系も問われる。</p>
+      <ul>
+        <li><b>景観法</b>（4回）＋歴史まちづくり法（2回）＋伝統的建造物群保存地区（20228・20238）</li>
+        <li><b>都市再生特別措置法</b>（2019・20258）＋立地適正化計画（2019）</li>
+        <li><b>まちづくりの協働</b>（NPO・協働・補完性の原則は20228・20248）</li>
+        <li><b>PFI</b>（H29-1・20238）と<b>建築協定</b>（H29-1・20258）は穴埋めの常連</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- 出題分野ごとの頻度 -->
+  <div class="card" style="margin-top:14px">
+    <h3><span class="num">B</span>分野別 出題頻度</h3>
+    <div class="scroll">
+    <table class="tbl examtbl">
+      <thead><tr><th>分野</th><th>代表キーワード</th><th>回数</th><th>出題例</th></tr></thead>
+      <tbody>
+        <tr><td>都市計画総論</td><td>都市計画・まちづくり</td><td class="c">18</td><td>都市計画の意義、まちづくりの主体</td></tr>
+        <tr><td>都市計画法／法制度</td><td>都市計画法・建築基準法・用途地域・区域区分・線引き・市街化区域・市街化調整区域・都市計画区域・地域地区</td><td class="c">25</td><td>H24-1・H29-1・exam_arch_20218–20258 各年</td></tr>
+        <tr><td>思想史（海外）</td><td>田園都市・グリーンベルト・ニュータウン・近隣住区・ハワード・アンウィン・ゲデス・ライト・コルビュジエ・ラドバーン・CIAM・アテネ憲章</td><td class="c">43</td><td>H25-1・H26-1・H29-1・exam_arch_20218–20258</td></tr>
+        <tr><td>日本都市史</td><td>関東大震災・同潤会・ニュータウン・城下町・条坊制・市区改正・東京市区改正</td><td class="c">25</td><td>全般</td></tr>
+        <tr><td>現代の課題</td><td>景観・景観法・歴史まちづくり・伝統的建造物群保存地区・都市再生・まちづくり条例</td><td class="c">27</td><td>全般、近年特に増加</td></tr>
+        <tr><td>その他</td><td>PFI・建築協定・福祉・児童福祉法・同潤会</td><td class="c">10</td><td>H29-1・exam_arch_20248・20258</td></tr>
+      </tbody>
+    </table>
+    </div>
+    <div class="tip">思想史が全試験中最も出題頻度が高い。具体的には「人物＋著書＋概念」の3点セットで覚えること。</div>
+  </div>
+
+  <!-- 過去問一覧 -->
+  <div class="card" style="margin-top:14px">
+    <h3><span class="num">L</span>過去問 出題の痕跡（都市計画系）</h3>
+    <div class="scroll">
+    <table class="tbl">
+      <thead><tr><th>過去問</th><th>キーワード数</th><th>都市計画・法制度・思想史・日本史・現代の課題 他の主要ヒット</th></tr></thead>
+      <tbody>
+<tr><td>exam_arch_20228</td><td class="c">32</td><td>思想史（アンウィン・オーウェン・ゲデス・ジェイコブス・ライト・田園都市・近隣住区・クルドサック・土地区画整理・市街地再開発）／日本史（城下町・市区改正・東京市区改正）／制度（用途地域・地域地区・容積率・建ぺい率・都市計画法・建築基準法・都市計画区域・区域区分・市街化区域・国土利用計画）／景観（景観・景観法・伝統的建造物群保存地区）</td></tr>
+<tr><td>exam_arch_20218</td><td class="c">30</td><td>思想史（アンウィン・オーウェン・ゲデス・ジェイコブス・ハワード・田園都市・グリーンベルト・近隣住区・CIAM・ライト）／制度（区域区分・線引き・市街化区域・市街化調整区域・建ぺい率・容積率・用途地域・都市計画法・建築基準法・都市計画区域・開発行為）／景観・関東大震災</td></tr>
+<tr><td>2019建筑学</td><td class="c">22</td><td>思想史（CIAM・アテネ憲章・オーウェン・ハワード・マンフォード・ライト・ラドバーン）／日本史（関東大震災・高度地区）／制度（都市計画法・区域区分・ゾーニング）／現代（まちづくり・都市再生・都市再生特別措置法・立地適正化計画・景観・歴史まちづくり）</td></tr>
+<tr><td>exam_arch_20258</td><td class="c">22</td><td>思想史（CIAM・オスマン・ゲデス・田園都市・ニュータウン）／制度（都市計画法・建築基準法・区域区分・市街化区域・市街化調整区域・線引き・地区計画・都市計画区域）／景観（景観）／都市再生（都市再生特別措置法）／福祉・関東大震災</td></tr>
+<tr><td>exam_arch_20238</td><td class="c">19</td><td>思想史（バロック・ラドバーン・コルビュジエ・ニュータウン）／制度（地区計画・地域地区・防火地域・区域区分）／景観（景観・景観法・歴史まちづくり・伝統的建造物群保存地区）／現代（まちづくり・PFI）</td></tr>
+<tr><td>H29-1</td><td class="c">15</td><td>思想史（コルビュジエ・ライト・ニュータウン・多摩ニュータウン・近隣住区）／制度（建築基準法・都市計画・都市計画区域・線引き・関東大震災・建築協定）／バロック・福祉・児童福祉法</td></tr>
+<tr><td>H26-1</td><td class="c">5</td><td>思想史（近隣住区・ニュータウン・多摩ニュータウン）／福祉・住居</td></tr>
+<tr><td>H24-1</td><td class="c">4</td><td>線引き・都市計画・都市計画区域・関東大震災</td></tr>
+<tr><td>H25-1</td><td class="c">3</td><td>ライト・建築基準法・都市計画</td></tr>
+<tr><td>H23-1</td><td class="c">2</td><td>バロック・都市計画</td></tr>
+<tr><td colspan="4" class="c" style="text-align:center;color:var(--ink3);background:#faf7ef">exam_arch_20248（9）、POQ_arch_20258（3）も都市計画系のヒットあり。H27・H28・H29-2・H29-3・H23-2・H23-3・H24-2・H24-3・H25-2・H25-3・H26-2・H26-3 は都市計画系の直接出題なし（建築史・構造・設備・小論文・即日設計のみ）。</td></tr>
+      </tbody>
+    </table>
+    </div>
+  </div>
+
+  <!-- 直前チェック -->
+  <div class="card" style="margin-top:14px">
+    <h3><span class="num">✓</span>東科大 直前チェックリスト（都市計画編）</h3>
+    <ul>
+      <li><b>思想史 定番3セット</b>：ハワード＋田園都市＋3万2,000人／ペリー＋近隣住区論／コルビュジエ＋CIAM＋アテネ憲章（4機能）。</li>
+      <li><b>日本史 震災セット</b>：関東大震災1923＋同潤会＋帝都復興院。</li>
+      <li><b>都市計画法 核心</b>：線引き（市街化区域・市街化調整区域）／用途地域13種類（住居系8・商業系2・工業系3）／開発許可の区域別規模要件。</li>
+      <li><b>現代課題 トレンド</b>：景観法2004＋歴史まちづくり法2008／都市再生特別措置法2002／まちづくり条例（神戸市1981）／協働・NPO・補完性の原則。</li>
+      <li><b>ひっかけ問題</b>：開発許可権者は都道府県知事（市町村ではない）／市街化調整区域の開発許可は立地基準のみ適用／ラドバーンはアメリカ（1928）、レッチワースはイギリス（1903）、千里ニュータウンは日本第1号（1962）。</li>
+      <li><b>計算も出る</b>：建ぺい率・容積率の計算、前面道路幅員制限（法定乗数 住居系4/10・その他6/10）、接道義務4m・2m。</li>
+    </ul>
+  </div>
+</section>
+
+</main>
+
+<footer>都市計画 復習資料</footer>
+
+
+
+
+<script>
+// ==== Keyword Search — targets: .card AND section.part ====
+(function(){
+  var input = document.getElementById('kwsearch');
+  var sumEl = document.getElementById('searchSum');
+  if (!input) return;
+
+  // Search targets: every .card + every <section class="part">
+  // (header/hero/nav/footer are NOT .part — safe)
+  var targets = Array.from(document.querySelectorAll('.card, section.part'));
+  // Remove nested cards from targets if a parent .part is also a target
+  // No need — they're independent units.
+  var total = targets.length;
+  console.log('[search] targets: ' + total + ' (cards + sections)');
+
+  function clearHighlights(){
+    document.querySelectorAll('.search-hit').forEach(function(hl){
+      var p = hl.parentNode;
+      if (p){ while (hl.firstChild) p.insertBefore(hl.firstChild, hl); p.removeChild(hl); p.normalize(); }
+    });
+  }
+
+  function highlightInNode(node, qLower){
+    if (!node || !node.childNodes) return;
+    var walker = document.createTreeWalker(node, NodeFilter.SHOW_TEXT, null);
+    var texts = [];
+    var t;
+    while ((t = walker.nextNode())) texts.push(t);
+    for (var i = 0; i < texts.length; i++){
+      var tn = texts[i];
+      var full = tn.nodeValue;
+      if (!full) continue;
+      var lower = full.toLowerCase();
+      if (lower.indexOf(qLower) < 0) continue;
+      // Skip if inside SCRIPT/STYLE tag
+      var p = tn.parentNode;
+      while (p && p !== node){
+        if (p.tagName === 'SCRIPT' || p.tagName === 'STYLE') break;
+        p = p.parentNode;
+      }
+      if (p && (p.tagName === 'SCRIPT' || p.tagName === 'STYLE')) continue;
+
+      var safe = qLower.replace(/[.*+?^${}()|[\]\\]/g,'\$&');
+      var re = new RegExp('(' + safe + ')', 'gi');
+      var frag = document.createDocumentFragment();
+      var last = 0, m2;
+      while ((m2 = re.exec(lower)) !== null){
+        if (m2.index > last) frag.appendChild(document.createTextNode(full.substring(last, m2.index)));
+        var sp = document.createElement('span');
+        sp.className = 'search-hit';
+        sp.appendChild(document.createTextNode(full.substring(m2.index, m2.index + m2[0].length)));
+        frag.appendChild(sp);
+        last = m2.index + m2[0].length;
+        if (m2[0].length === 0){ re.lastIndex++; }
+      }
+      if (last < full.length) frag.appendChild(document.createTextNode(full.substring(last)));
+      tn.parentNode.replaceChild(frag, tn);
+    }
+  }
+
+  function doSearch(){
+    var q = input.value.trim();
+    clearHighlights();
+    targets.forEach(function(t){ t.classList.remove('search-hidden'); });
+    if (!q){ if (sumEl) sumEl.textContent = ''; return; }
+    var ql = q.toLowerCase();
+    var hits = 0;
+    targets.forEach(function(t){
+      if (t.textContent.toLowerCase().indexOf(ql) >= 0){
+        t.classList.remove('search-hidden');
+        hits++;
+        highlightInNode(t, ql);
+      } else {
+        t.classList.add('search-hidden');
+      }
+    });
+    if (sumEl) sumEl.textContent = hits + ' / ' + total + ' 件';
+    console.log('[search] "' + q + '" → ' + hits + '/' + total);
+  }
+
+  input.addEventListener('keydown', function(e){
+    if (e.key === 'Enter'){ e.preventDefault(); doSearch(); }
+  });
+  document.addEventListener('keydown', function(e){
+    if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'k'){
+      e.preventDefault(); input.focus(); input.select();
+    }
+    if (e.key === 'Escape'){ input.value = ''; doSearch(); input.blur(); }
+  });
+  window.clearSearch = function(){ input.value = ''; doSearch(); input.focus(); };
+  window.__doSearch = doSearch;
+  console.log('[search] ready');
+})();
+</script>
+</body></body></body></body>
+</html>
